@@ -1700,14 +1700,22 @@
     }
   }
 
-  // ✅ ADDED: touchend + click with double-fire prevention
+  // iOS AudioContext unlock — must happen on first touch anywhere on page
+  function unlockAudioContext() {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume().then(function() { ctx.close(); });
+  }
+  document.addEventListener('touchstart', unlockAudioContext, { once: true });
+
+  // touchend + click with double-fire prevention
+  // NOTE: NO e.preventDefault() here — iOS Safari requires the gesture to remain
+  // "unconsumed" so it recognises the subsequent audio.play() as user-initiated
   var touchTriggered = false;
   nfcPhone.addEventListener('touchend', function(e) {
-    e.preventDefault();
     touchTriggered = true;
     handlePhoneTap();
     setTimeout(function() { touchTriggered = false; }, 500);
-  }, { passive: false });
+  }, { passive: true });
 
   nfcPhone.addEventListener('click', function(e) {
     if (touchTriggered) return;

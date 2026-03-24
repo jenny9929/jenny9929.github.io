@@ -1258,8 +1258,8 @@
         <!-- Hint badge -->
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <!-- ✅ CHANGED: absolute URL + preload="auto" -->
-        <audio id="nfcAudio" loop playsinline preload="metadata">
-          <source src="https://jennyhaus.com/audio/nfc-song.mp3" type="audio/mpeg" />
+        <audio id="nfcAudio" loop playsinline preload="auto">
+          <source src="https://jennyhaus.com/audio/nfc-song.mp3" type="audio/mp3" />
         </audio>
       </div>
     </div>
@@ -1645,6 +1645,8 @@
   // interaction and then refuses the subsequent play() as non-user-initiated
 
   function handlePhoneTap() {
+    unlockAudioContext(); // iOS: unlock audio context first, synchronously
+
     // Visual feedback
     nfcWaves.classList.remove('burst');
     void nfcWaves.offsetWidth;
@@ -1696,13 +1698,18 @@
     }
   }
 
-  // iOS AudioContext unlock — must be on touchend (non-passive), NOT touchstart.
-  // WebKit does NOT grant transient user activation from touchstart (could be a scroll).
+  // iOS AudioContext unlock — called at the top of every tap (fire-and-forget).
+  // Keeping it synchronous inside handlePhoneTap avoids the race condition where
+  // a separate listener and play() both fire on the same first touchend.
+  var audioCtxUnlocked = false;
   function unlockAudioContext() {
-    var ctx = new (window.AudioContext || window.webkitAudioContext)();
-    ctx.resume().then(function() { ctx.close(); });
+    if (audioCtxUnlocked) return;
+    audioCtxUnlocked = true;
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      ctx.resume().then(function() { ctx.close(); });
+    } catch(e) {}
   }
-  document.addEventListener('touchend', unlockAudioContext, { once: true });
 
   // touchend — must NOT be passive. WebKit only grants transient user activation
   // (required for audio.play()) to non-passive touchend listeners.

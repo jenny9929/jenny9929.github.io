@@ -374,7 +374,11 @@
       transform: rotate(6deg);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: phone-breathe 2s ease-in-out infinite;
-      cursor: none;
+      /* ✅ CHANGED: was cursor:none */
+      cursor: pointer;
+      touch-action: manipulation;        /* ✅ ADDED */
+      -webkit-tap-highlight-color: transparent; /* ✅ ADDED */
+      z-index: 10;                       /* ✅ ADDED */
     }
 
     @keyframes phone-breathe {
@@ -382,12 +386,15 @@
       50%       { transform: rotate(6deg) scale(1.05); }
     }
 
-    .phone:hover {
-      animation: none;
-      transform: rotate(6deg) translateY(-6px) scale(1.04);
-      box-shadow:
-        0 22px 50px rgba(58, 53, 48, 0.22),
-        inset 0 1px 0 rgba(255,255,255,0.6);
+    /* ✅ CHANGED: wrapped in hover media query */
+    @media (hover: hover) {
+      .phone:hover {
+        animation: none;
+        transform: rotate(6deg) translateY(-6px) scale(1.04);
+        box-shadow:
+          0 22px 50px rgba(58, 53, 48, 0.22),
+          inset 0 1px 0 rgba(255,255,255,0.6);
+      }
     }
 
     .phone-notch {
@@ -411,6 +418,7 @@
       justify-content: center;
       gap: 6px;
       padding: 8px;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     .phone-music-icon {
@@ -423,6 +431,7 @@
       justify-content: center;
       font-size: 14px;
       transition: transform 0.2s;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     /* idle state: gentle pulse */
@@ -458,6 +467,7 @@
       background: var(--gold-light);
       border-radius: 2px;
       overflow: hidden;
+      pointer-events: none; /* ✅ ADDED */
     }
     .phone-song-progress {
       height: 100%;
@@ -481,6 +491,7 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       text-align: center;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     /* tap-to-play hint badge */
@@ -501,6 +512,7 @@
       box-shadow: 0 4px 14px rgba(201, 169, 110, 0.4);
       white-space: nowrap;
       animation: badge-pulse 2s ease-in-out infinite;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     @keyframes badge-pulse {
@@ -521,6 +533,7 @@
       top: 60px; right: 40px;
       width: 80px;
       height: 80px;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     .wave-ring {
@@ -1244,9 +1257,9 @@
         </div>
         <!-- Hint badge -->
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
-        <!-- Audio: replace src with your music file path -->
-        <audio id="nfcAudio" loop playsinline>
-          <source src="audio/nfc-song.mp3" type="audio/mpeg" />
+        <!-- ✅ CHANGED: absolute URL + preload="auto" -->
+        <audio id="nfcAudio" loop playsinline preload="auto">
+          <source src="https://jennyhaus.com/audio/nfc-song.mp3" type="audio/mpeg" />
         </audio>
       </div>
     </div>
@@ -1619,19 +1632,21 @@
 
   reveals.forEach(el => observer.observe(el));
 
-  // ─── NFC Phone Interaction ───
-  const nfcPhone    = document.getElementById('nfcPhone');
-  const musicIcon   = document.getElementById('musicIcon');
+  /* ✅ CHANGED: entire NFC Phone Interaction section rewritten for mobile */
+  const nfcPhone     = document.getElementById('nfcPhone');
+  const musicIcon    = document.getElementById('musicIcon');
   const songProgress = document.getElementById('songProgress');
-  const songText    = document.getElementById('songText');
-  const nfcWaves    = document.getElementById('nfcWaves');
-  const nfcAudio    = document.getElementById('nfcAudio');
+  const songText     = document.getElementById('songText');
+  const nfcWaves     = document.getElementById('nfcWaves');
+  const nfcAudio     = document.getElementById('nfcAudio');
   let isPlaying = false;
 
-  nfcPhone.addEventListener('click', () => {
+  nfcAudio.load();
+
+  function handlePhoneTap() {
     // Burst waves animation
     nfcWaves.classList.remove('burst');
-    void nfcWaves.offsetWidth; // reflow to restart
+    void nfcWaves.offsetWidth;
     nfcWaves.classList.add('burst');
     setTimeout(() => nfcWaves.classList.remove('burst'), 1200);
 
@@ -1651,18 +1666,52 @@
       songProgress.style.width = '0%';
       songText.textContent = 'tap to play ✦';
     } else {
-      nfcAudio.play().catch((e) => console.log(e));
-      isPlaying = true;
-      musicIcon.textContent = '▶';
-      songProgress.classList.remove('playing');
-      void songProgress.offsetWidth;
-      songProgress.classList.add('playing');
-      songText.textContent = 'playing your song...';
-      setTimeout(() => {
-        musicIcon.classList.remove('idle', 'tapped');
-        musicIcon.classList.add('playing');
-      }, 300);
+      // Play
+      songText.textContent = 'loading...';
+      nfcAudio.currentTime = 0;
+      nfcAudio.volume = 1.0;
+
+      var playPromise = nfcAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(function() {
+          isPlaying = true;
+          musicIcon.textContent = '⏸';
+          songProgress.classList.remove('playing');
+          void songProgress.offsetWidth;
+          songProgress.classList.add('playing');
+          songText.textContent = 'playing your song...';
+          setTimeout(function() {
+            musicIcon.classList.remove('idle', 'tapped');
+            musicIcon.classList.add('playing');
+          }, 300);
+        }).catch(function(err) {
+          isPlaying = false;
+          musicIcon.classList.remove('tapped', 'playing');
+          musicIcon.classList.add('idle');
+          musicIcon.textContent = '♪';
+          if (err.name === 'NotAllowedError') {
+            songText.textContent = 'tap again ✦';
+          } else {
+            songText.textContent = 'retry ✦';
+            nfcAudio.load();
+          }
+        });
+      }
     }
+  }
+
+  // ✅ ADDED: touchend + click with double-fire prevention
+  var touchTriggered = false;
+  nfcPhone.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    touchTriggered = true;
+    handlePhoneTap();
+    setTimeout(function() { touchTriggered = false; }, 500);
+  }, { passive: false });
+
+  nfcPhone.addEventListener('click', function(e) {
+    if (touchTriggered) return;
+    handlePhoneTap();
   });
 
   // Reset when audio ends (non-loop case)

@@ -1245,7 +1245,7 @@
         <!-- Hint badge -->
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <!-- Audio: replace src with your music file path -->
-        <audio id="nfcAudio" loop>
+        <audio id="nfcAudio" loop playsinline>
           <source src="audio/nfc-song.mp3" type="audio/mpeg" />
         </audio>
       </div>
@@ -1652,8 +1652,9 @@
       songText.textContent = 'tap to play ✦';
     } else {
       // Play
-      nfcAudio.play().catch(() => {
-        // No audio file yet — still show the animation
+      nfcAudio.load();
+      nfcAudio.play().catch((e) => {
+        console.log('play error:', e);
       });
       isPlaying = true;
       setTimeout(() => {

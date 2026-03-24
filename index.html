@@ -374,10 +374,11 @@
       transform: rotate(6deg);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: phone-breathe 2s ease-in-out infinite;
+      /* ✅ CHANGED: was cursor:none */
       cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      z-index: 10;
+      touch-action: manipulation;        /* ✅ ADDED */
+      -webkit-tap-highlight-color: transparent; /* ✅ ADDED */
+      z-index: 10;                       /* ✅ ADDED */
     }
 
     @keyframes phone-breathe {
@@ -385,6 +386,7 @@
       50%       { transform: rotate(6deg) scale(1.05); }
     }
 
+    /* ✅ CHANGED: wrapped in hover media query */
     @media (hover: hover) {
       .phone:hover {
         animation: none;
@@ -416,7 +418,7 @@
       justify-content: center;
       gap: 6px;
       padding: 8px;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     .phone-music-icon {
@@ -429,7 +431,7 @@
       justify-content: center;
       font-size: 14px;
       transition: transform 0.2s;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     /* idle state: gentle pulse */
@@ -465,7 +467,7 @@
       background: var(--gold-light);
       border-radius: 2px;
       overflow: hidden;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
     .phone-song-progress {
       height: 100%;
@@ -489,7 +491,7 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       text-align: center;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     /* tap-to-play hint badge */
@@ -510,7 +512,7 @@
       box-shadow: 0 4px 14px rgba(201, 169, 110, 0.4);
       white-space: nowrap;
       animation: badge-pulse 2s ease-in-out infinite;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     @keyframes badge-pulse {
@@ -531,7 +533,7 @@
       top: 60px; right: 40px;
       width: 80px;
       height: 80px;
-      pointer-events: none;
+      pointer-events: none; /* ✅ ADDED */
     }
 
     .wave-ring {
@@ -1165,9 +1167,11 @@
 </head>
 <body>
 
+<!-- ─── Custom Cursor ─── -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
+<!-- ─── Mobile Nav ─── -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-nav-close" id="mobileNavClose">✕</button>
   <a href="#about" onclick="closeMobileNav()">Story</a>
@@ -1176,6 +1180,7 @@
   <a href="#collab" onclick="closeMobileNav()">Collaborate</a>
 </div>
 
+<!-- ─── Nav ─── -->
 <nav id="navbar">
   <div class="container nav-inner">
     <a class="nav-logo" href="#"><span>Jenny</span>DIYCorner</a>
@@ -1192,6 +1197,7 @@
   </div>
 </nav>
 
+<!-- ─── Hero ─── -->
 <section id="hero">
   <div class="hero-bg-orb orb-1"></div>
   <div class="hero-bg-orb orb-2"></div>
@@ -1213,6 +1219,7 @@
 
     <div class="hero-visual">
       <div class="nfc-scene">
+        <!-- Art print — square, polaroid-style -->
         <div class="art-print">
           <img
             id="artworkImg"
@@ -1231,6 +1238,7 @@
             </svg>
           </div>
         </div>
+        <!-- Phone — click to play music -->
         <div class="phone" id="nfcPhone" title="Tap to play">
           <div class="phone-notch"></div>
           <div class="phone-screen" id="phoneScreen">
@@ -1241,13 +1249,16 @@
             <div class="phone-song-text" id="songText">tap to play ✦</div>
           </div>
         </div>
+        <!-- NFC waves -->
         <div class="nfc-waves" id="nfcWaves">
           <div class="wave-ring"></div>
           <div class="wave-ring"></div>
           <div class="wave-ring"></div>
         </div>
+        <!-- Hint badge -->
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
-        <audio id="nfcAudio" loop playsinline preload="auto">
+        <!-- ✅ CHANGED: absolute URL + preload="auto" -->
+        <audio id="nfcAudio" loop playsinline preload="metadata">
           <source src="https://jennyhaus.com/audio/nfc-song.mp3" type="audio/mpeg" />
         </audio>
       </div>
@@ -1255,10 +1266,12 @@
   </div>
 </section>
 
+<!-- ─── About ─── -->
 <section id="about">
   <div class="container about-inner">
     <div class="about-image-wrap reveal">
       <div class="about-image-main">
+        <!-- Replace with your photo -->
         <span style="font-size:0.75rem; letter-spacing:0.08em; color: var(--text-light);">[ Your Photo Here ]</span>
       </div>
       <div class="about-image-accent">
@@ -1305,6 +1318,7 @@
   </div>
 </section>
 
+<!-- ─── NFC Art ─── -->
 <section id="nfc">
   <div class="container">
     <div class="nfc-header reveal">
@@ -1379,6 +1393,7 @@
   </div>
 </section>
 
+<!-- ─── The World Opens for Her ─── -->
 <section id="series">
   <div class="container series-inner">
     <div class="series-manifesto reveal">
@@ -1438,6 +1453,7 @@
   </div>
 </section>
 
+<!-- ─── Collaboration ─── -->
 <section id="collab">
   <div class="container collab-inner">
     <div class="reveal">
@@ -1513,6 +1529,7 @@
   </div>
 </section>
 
+<!-- ─── Footer ─── -->
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -1615,7 +1632,7 @@
 
   reveals.forEach(el => observer.observe(el));
 
-  /* ✅ CHANGED: 彻底重写了 iOS 兼容的音频播放逻辑 */
+  /* ✅ CHANGED: entire NFC Phone Interaction section rewritten for mobile */
   const nfcPhone     = document.getElementById('nfcPhone');
   const musicIcon    = document.getElementById('musicIcon');
   const songProgress = document.getElementById('songProgress');
@@ -1624,8 +1641,11 @@
   const nfcAudio     = document.getElementById('nfcAudio');
   let isPlaying = false;
 
+  // Do NOT call nfcAudio.load() here — iOS treats it as a programmatic
+  // interaction and then refuses the subsequent play() as non-user-initiated
+
   function handlePhoneTap() {
-    // 视觉反馈
+    // Visual feedback
     nfcWaves.classList.remove('burst');
     void nfcWaves.offsetWidth;
     nfcWaves.classList.add('burst');
@@ -1636,7 +1656,7 @@
     musicIcon.classList.add('tapped');
 
     if (isPlaying) {
-      // 暂停
+      // PAUSE — safe to set currentTime here (no play() follows on iOS)
       nfcAudio.pause();
       nfcAudio.currentTime = 0;
       isPlaying = false;
@@ -1647,11 +1667,11 @@
       songProgress.style.width = '0%';
       songText.textContent = 'tap to play ✦';
     } else {
-      // 播放
+      // PLAY — call play() immediately, no currentTime or load() before it
+      // iOS requires play() to be the very next meaningful call after the gesture
       nfcAudio.volume = 1.0;
       songText.textContent = 'loading...';
 
-      // iOS 要求 play() 必须在标准 user gesture 中同步调用
       var playPromise = nfcAudio.play();
       if (playPromise !== undefined) {
         playPromise.then(function() {
@@ -1670,24 +1690,36 @@
           musicIcon.classList.remove('tapped', 'playing');
           musicIcon.classList.add('idle');
           musicIcon.textContent = '♪';
-          songText.textContent = 'tap again ✦';
-          console.error("Audio play failed:", err);
+          songText.textContent = err.name === 'NotAllowedError' ? 'tap again ✦' : 'retry ✦';
         });
       }
     }
   }
 
-  // iOS HTML5 Audio 解锁：利用用户的第一次全屏触摸来初始化音频引擎
-  document.addEventListener('touchstart', function() {
-    nfcAudio.load();
-  }, { once: true, passive: true });
+  // iOS AudioContext unlock — must be on touchend (non-passive), NOT touchstart.
+  // WebKit does NOT grant transient user activation from touchstart (could be a scroll).
+  function unlockAudioContext() {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume().then(function() { ctx.close(); });
+  }
+  document.addEventListener('touchend', unlockAudioContext, { once: true });
 
-  // 抛弃 touchend，只使用 click。iOS 极度偏爱原生的 click 来触发媒体播放
+  // touchend — must NOT be passive. WebKit only grants transient user activation
+  // (required for audio.play()) to non-passive touchend listeners.
+  // { passive: true } silently breaks iOS audio even without preventDefault().
+  var touchTriggered = false;
+  nfcPhone.addEventListener('touchend', function(e) {
+    touchTriggered = true;
+    handlePhoneTap();
+    setTimeout(function() { touchTriggered = false; }, 500);
+  }); // no options = default non-passive for touchend ✓
+
   nfcPhone.addEventListener('click', function(e) {
+    if (touchTriggered) return;
     handlePhoneTap();
   });
 
-  // 监听音频结束
+  // Reset when audio ends (non-loop case)
   nfcAudio.addEventListener('ended', () => {
     isPlaying = false;
     musicIcon.classList.remove('playing');

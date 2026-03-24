@@ -1651,21 +1651,17 @@
       songProgress.style.width = '0%';
       songText.textContent = 'tap to play ✦';
     } else {
-      // Play
-      nfcAudio.load();
-      nfcAudio.play().catch((e) => {
-        console.log('play error:', e);
-      });
+      nfcAudio.play().catch((e) => console.log(e));
       isPlaying = true;
-      setTimeout(() => {
-        musicIcon.classList.remove('idle', 'tapped');
-        musicIcon.classList.add('playing');
-      }, 300);
       musicIcon.textContent = '▶';
       songProgress.classList.remove('playing');
       void songProgress.offsetWidth;
       songProgress.classList.add('playing');
       songText.textContent = 'playing your song...';
+      setTimeout(() => {
+        musicIcon.classList.remove('idle', 'tapped');
+        musicIcon.classList.add('playing');
+      }, 300);
     }
   });
 

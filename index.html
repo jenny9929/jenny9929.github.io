@@ -1679,7 +1679,7 @@
       if (playPromise !== undefined) {
         playPromise.then(function() {
           isPlaying = true;
-          musicIcon.textContent = '⏸';
+          // Keep ♪ — don't swap to ⏸ emoji, iOS forces it blue overriding CSS styling
           songProgress.classList.remove('playing');
           void songProgress.offsetWidth;
           songProgress.classList.add('playing');

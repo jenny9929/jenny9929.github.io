@@ -1258,7 +1258,7 @@
         <!-- Hint badge -->
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <!-- ✅ CHANGED: absolute URL + preload="auto" -->
-        <audio id="nfcAudio" loop playsinline preload="auto">
+        <audio id="nfcAudio" loop playsinline preload="none">
           <source src="https://jennyhaus.com/audio/nfc-song.mp3" type="audio/mpeg" />
         </audio>
       </div>
@@ -1641,23 +1641,24 @@
   const nfcAudio     = document.getElementById('nfcAudio');
   let isPlaying = false;
 
-  nfcAudio.load();
+  // Do NOT call nfcAudio.load() here — iOS treats it as a programmatic
+  // interaction and then refuses the subsequent play() as non-user-initiated
 
   function handlePhoneTap() {
-    // Burst waves animation
+    // Visual feedback
     nfcWaves.classList.remove('burst');
     void nfcWaves.offsetWidth;
     nfcWaves.classList.add('burst');
-    setTimeout(() => nfcWaves.classList.remove('burst'), 1200);
+    setTimeout(function() { nfcWaves.classList.remove('burst'); }, 1200);
 
-    // Tap ripple on icon
     musicIcon.classList.remove('tapped');
     void musicIcon.offsetWidth;
     musicIcon.classList.add('tapped');
 
     if (isPlaying) {
-      // Pause
+      // PAUSE — safe to set currentTime here (no play() follows on iOS)
       nfcAudio.pause();
+      nfcAudio.currentTime = 0;
       isPlaying = false;
       musicIcon.classList.remove('playing', 'tapped');
       musicIcon.classList.add('idle');
@@ -1666,10 +1667,10 @@
       songProgress.style.width = '0%';
       songText.textContent = 'tap to play ✦';
     } else {
-      // Play
-      songText.textContent = 'loading...';
-      nfcAudio.currentTime = 0;
+      // PLAY — call play() immediately, no currentTime or load() before it
+      // iOS requires play() to be the very next meaningful call after the gesture
       nfcAudio.volume = 1.0;
+      songText.textContent = 'loading...';
 
       var playPromise = nfcAudio.play();
       if (playPromise !== undefined) {
@@ -1689,12 +1690,7 @@
           musicIcon.classList.remove('tapped', 'playing');
           musicIcon.classList.add('idle');
           musicIcon.textContent = '♪';
-          if (err.name === 'NotAllowedError') {
-            songText.textContent = 'tap again ✦';
-          } else {
-            songText.textContent = 'retry ✦';
-            nfcAudio.load();
-          }
+          songText.textContent = err.name === 'NotAllowedError' ? 'tap again ✦' : 'retry ✦';
         });
       }
     }

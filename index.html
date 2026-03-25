@@ -580,6 +580,8 @@
       color: var(--text-light);
       font-size: 0.8rem;
       letter-spacing: 0.05em;
+      -webkit-mask-image: radial-gradient(ellipse 90% 88% at 50% 42%, black 48%, rgba(0,0,0,0.7) 66%, transparent 100%);
+      mask-image: radial-gradient(ellipse 90% 88% at 50% 42%, black 48%, rgba(0,0,0,0.7) 66%, transparent 100%);
     }
 
     .about-image-accent {
@@ -590,11 +592,14 @@
       background: linear-gradient(135deg, var(--mint), #C5DDD3);
       border-radius: 16px;
       border: 4px solid var(--white);
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-light);
       font-size: 0.7rem;
+      -webkit-mask-image: radial-gradient(ellipse 94% 94% at 50% 50%, black 52%, rgba(0,0,0,0.65) 72%, transparent 100%);
+      mask-image: radial-gradient(ellipse 94% 94% at 50% 50%, black 52%, rgba(0,0,0,0.65) 72%, transparent 100%);
     }
 
     .about-tags {
@@ -1257,31 +1262,40 @@
   <div class="container about-inner">
     <div class="about-image-wrap reveal">
       <div class="about-image-main">
-        <span style="font-size:0.75rem; letter-spacing:0.08em; color: var(--text-light);">[ Your Photo Here ]</span>
+        <img src="images/jenny-photo.jpg" alt="Jenny" style="width:100%;height:100%;object-fit:cover;object-position:bottom;border-radius:24px;"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <span style="font-size:0.75rem;letter-spacing:0.08em;color:var(--text-light);display:none;">[ Your Photo Here ]</span>
       </div>
       <div class="about-image-accent">
-        <span style="font-size:0.65rem; text-align:center; color: var(--text-light);">Studio<br>Shot</span>
+        <img src="images/studio.jpg" alt="Jenny's Studio" style="width:100%;height:100%;object-fit:cover;" />
       </div>
     </div>
 
     <div class="about-text reveal reveal-delay-1">
       <p class="section-label">About Jenny</p>
-      <h2 class="section-title">From courtrooms &amp; code<br>to <em>canvas &amp; craft.</em></h2>
+      <h2 class="section-title">Art found me when I<br>had something <em>to say.</em></h2>
+      <p class="section-title" style="font-size:clamp(1.1rem,2vw,1.4rem); font-weight:300; font-style:italic; color:var(--gold); margin-top:-0.75rem; margin-bottom:1.25rem;">And I haven't stopped since.</p>
       <div class="about-tags">
-        <span class="tag tag-gold">Tech Background</span>
+        <span class="tag tag-gold">Cross-Industry</span>
         <span class="tag tag-mint">Independent Artist</span>
         <span class="tag tag-blush">Bay Area</span>
         <span class="tag tag-gold">NFC Pioneer</span>
       </div>
-      <p class="section-body">
-        I've spent years navigating the intersections of law, finance, and technology — always believing that creativity doesn't have to stay in its lane. Now based in the Bay Area, I channel that cross-disciplinary energy into art that does something art has never done before: it plays music.
+      <p class="section-body" style="margin-top:0.25rem;">
+        Law. Finance. Tech. Three industries that rarely make space for women to be fully themselves. I felt that. And I wanted to do something about it. <span style="color:var(--gold);">Art became my answer.</span>
+      </p>
+      <p class="section-body" style="margin-top:1.25rem;">
+        Because I've lived inside these worlds, I see them differently — and I paint them that way. <span style="color:var(--gold);">That's a perspective that's entirely my own.</span>
+      </p>
+      <p class="section-body" style="margin-top:1.25rem;">
+        Based in the Bay Area, I couldn't help but ask: what if art and technology could speak the same language? That question became NFC art. <span style="color:var(--gold);">My pieces have since reached tech professionals and companies across the US</span> — and for many of them, it was their first time experiencing technology and aesthetics in the same breath.
       </p>
       <div class="journey-steps">
         <div class="journey-step">
           <div class="step-dot">⚖</div>
           <div class="step-text">
             <strong>Legal &amp; Finance World</strong>
-            <span>Built a sharp analytical mind and an eye for detail</span>
+            <span>Learned to spot what's overlooked — and speak up for it</span>
           </div>
         </div>
         <div class="journey-step">
@@ -1295,7 +1309,7 @@
           <div class="step-dot">🎨</div>
           <div class="step-text">
             <strong>Jenny DIY Corner</strong>
-            <span>Merged it all — NFC art born in the Bay Area</span>
+            <span>Where cross-industry vision became tech art · Born in the Bay Area</span>
           </div>
         </div>
       </div>
@@ -1628,7 +1642,7 @@
     try {
       songText.textContent = 'preparing...';
       // 用普通下载方式获取 mp3，完美避开 Safari 的分段请求 bug
-      const response = await fetch('https://jennyhaus.com/audio/nfc-song.mp3');
+      const response = await fetch('https://jennyhaus.com/audio/nfc-song.mp3?v=2');
       const blob = await response.blob();
       // 在手机内存里生成一个本地链接
       const blobUrl = URL.createObjectURL(blob);

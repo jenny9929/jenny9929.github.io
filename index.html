@@ -792,79 +792,133 @@
 
     /* ─── The World Opens for Her ─── */
     #series {
-      padding-block: 7rem;
+      padding-block: 7rem 5rem;
       background: var(--white);
-      overflow: hidden;
     }
 
-    .series-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .series-manifesto {
-      position: sticky;
-      top: 100px;
+    .series-header {
+      width: min(680px, 88%);
+      margin-inline: auto;
+      text-align: center;
+      margin-bottom: 4rem;
     }
 
     .manifesto-quote {
       font-family: var(--serif);
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
       font-style: italic;
       font-weight: 300;
-      line-height: 1.5;
-      color: var(--text);
-      padding-left: 1.5rem;
-      border-left: 3px solid var(--gold);
-      margin: 2rem 0;
+      color: var(--text-mid);
+      margin: 1.25rem 0 0.9rem;
     }
 
-    .series-gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    .series-intro {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      letter-spacing: 0.03em;
+      margin-bottom: 2rem;
     }
 
-    .series-art-card {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(58,53,48,0.08);
-      cursor: pointer;
-      transition: transform 0.25s;
-    }
-    .series-art-card:hover { transform: scale(1.02); }
-
-    .series-art-card:first-child {
-      grid-column: 1 / -1;
-    }
-
-    .series-art-img {
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.05em;
+    /* Gallery */
+    .series-gallery-wrap {
       position: relative;
+      width: 100%;
     }
 
-    .series-art-card:first-child .series-art-img { aspect-ratio: 16/9; }
+    .series-fade-left, .series-fade-right {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .series-fade-left  { left: 0;  background: linear-gradient(to right, var(--white), transparent); }
+    .series-fade-right { right: 0; background: linear-gradient(to left,  var(--white), transparent); }
 
-    .series-art-img-1 { background: linear-gradient(145deg, #C9B8A8, #9A7D6E); }
-    .series-art-img-2 { background: linear-gradient(145deg, #A8C4C0, #6A9E99); }
-    .series-art-img-3 { background: linear-gradient(145deg, #C4A8B8, #9E6A8A); }
-    .series-art-img-4 { background: linear-gradient(145deg, #B8C4A8, #7A9E6A); }
-    .series-art-img-5 { background: linear-gradient(145deg, #C4B8A8, #9E8A6A); }
+    .series-track {
+      display: flex;
+      gap: 14px;
+      padding-inline: 80px;
+      overflow-x: scroll;
+      scrollbar-width: none;
+      cursor: grab;
+      user-select: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .series-track::-webkit-scrollbar { display: none; }
+    .series-track.dragging { cursor: grabbing; }
 
-    .series-art-caption {
+    .series-card {
+      flex-shrink: 0;
+      width: 400px;
+      height: 400px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .series-card:hover { transform: scale(1.03); }
+
+    .series-card-bg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .series-card-num {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-size: 0.63rem;
+      font-family: var(--sans);
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.45);
+      z-index: 2;
+    }
+
+    .series-card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(28,22,18,0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       padding: 0.85rem 1rem;
-      background: var(--white);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 3;
     }
-    .series-art-caption strong { font-family: var(--serif); font-size: 0.9rem; display: block; }
-    .series-art-caption span { font-size: 0.72rem; color: var(--text-light); }
+    .series-card:hover .series-card-info { transform: translateY(0); }
+
+    .series-card-info strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--gold-light);
+      margin-bottom: 0.15rem;
+    }
+    .series-card-info span {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+    }
+
+    /* Progress bar */
+    .series-progress-wrap {
+      width: min(320px, 60%);
+      margin: 2.5rem auto 0;
+      height: 2px;
+      background: rgba(201,169,110,0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .series-progress-bar {
+      height: 100%;
+      width: 4%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.08s linear;
+    }
 
     /* ─── Collaboration ─── */
     #collab {
@@ -1118,8 +1172,9 @@
 
       .product-grid { grid-template-columns: repeat(2, 1fr); }
 
-      .series-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .series-manifesto { position: static; }
+      .series-card { width: 280px; height: 280px; }
+      .series-fade-left, .series-fade-right { width: 50px; }
+      .series-track { padding-inline: 24px; gap: 10px; }
 
       .collab-inner { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -1129,8 +1184,6 @@
 
     @media (max-width: 540px) {
       .product-grid { grid-template-columns: 1fr 1fr; }
-      .series-gallery { grid-template-columns: 1fr; }
-      .series-art-card:first-child { grid-column: auto; }
     }
 
     /* ─── Mobile Nav Overlay ─── */
@@ -1391,62 +1444,178 @@
 </section>
 
 <section id="series">
-  <div class="container series-inner">
-    <div class="series-manifesto reveal">
-      <p class="section-label">Original Series</p>
-      <h2 class="section-title">The World Opens<br><em>for Her.</em></h2>
-      <blockquote class="manifesto-quote">
-        "You can go anywhere, become anyone — unbounded."
-      </blockquote>
-      <p class="section-body">
-        A collection dedicated to the women who navigate demanding careers, cross borders, and refuse to be defined by a single role. Each piece is a portal — a reminder that the world does not close its doors on you. You open them.
-      </p>
-      <br/>
-      <p class="section-body">
-        Inspired by conversations with lawyers, engineers, founders, and creators in the Bay Area and beyond — women who carry ambition like a quiet fire.
-      </p>
-      <br/>
-      <a href="#collab" class="btn btn-outline" style="margin-top:1rem;">Commission a Piece</a>
-    </div>
-
-    <div class="series-gallery reveal reveal-delay-1">
-      <div class="series-art-card">
-        <div class="series-art-img series-art-img-1">[ Featured Work — Placeholder ]</div>
-        <div class="series-art-caption">
-          <strong>No. 1 — The First Door</strong>
-          <span>Acrylic · NFC: "Golden Hour" by artist TBD</span>
-        </div>
-      </div>
-      <div class="series-art-card">
-        <div class="series-art-img series-art-img-2">[ Artwork ]</div>
-        <div class="series-art-caption">
-          <strong>No. 2 — Across the Bridge</strong>
-          <span>Mixed media · NFC: Coming soon</span>
-        </div>
-      </div>
-      <div class="series-art-card">
-        <div class="series-art-img series-art-img-3">[ Artwork ]</div>
-        <div class="series-art-caption">
-          <strong>No. 3 — In Her Own Light</strong>
-          <span>Acrylic on canvas · NFC: Coming soon</span>
-        </div>
-      </div>
-      <div class="series-art-card">
-        <div class="series-art-img series-art-img-4">[ Artwork ]</div>
-        <div class="series-art-caption">
-          <strong>No. 4 — Boundless</strong>
-          <span>Digital print · NFC: Coming soon</span>
-        </div>
-      </div>
-      <div class="series-art-card">
-        <div class="series-art-img series-art-img-5">[ Artwork ]</div>
-        <div class="series-art-caption">
-          <strong>No. 5 — Every Corner</strong>
-          <span>Acrylic · NFC: Coming soon</span>
-        </div>
-      </div>
-    </div>
+  <!-- Header -->
+  <div class="series-header reveal">
+    <p class="section-label">Original Series</p>
+    <h2 class="section-title">The World Opens<br><em style="color:var(--gold);">for Her.</em></h2>
+    <blockquote class="manifesto-quote">"You can go anywhere, become anyone — unbounded."</blockquote>
+    <p class="series-intro">A collection of 25 works dedicated to women who refuse to be defined.</p>
+    <a href="#collab" class="btn btn-outline">Commission a Piece</a>
   </div>
+
+  <!-- Full-width gallery -->
+  <div class="series-gallery-wrap">
+    <div class="series-fade-left"></div>
+    <div class="series-fade-right"></div>
+    <div class="series-track" id="seriesTrack">
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/巴黎.jpg" alt="Paris" style="object-fit:cover;" />
+        <span class="series-card-num">No.01 / 25</span>
+        <div class="series-card-info"><strong>No.01 — Paris</strong><span>You deserve a fresh start.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/布拉格.jpg" alt="Prague" style="object-fit:cover;" />
+        <span class="series-card-num">No.02 / 25</span>
+        <div class="series-card-info"><strong>No.02 — Prague</strong><span>Every step you take counts.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/伦敦.jpg" alt="London" style="object-fit:cover;" />
+        <span class="series-card-num">No.03 / 25</span>
+        <div class="series-card-info"><strong>No.03 — London</strong><span>You belong just as you are.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/维也纳.jpg" alt="Vienna" style="object-fit:cover;" />
+        <span class="series-card-num">No.04 / 25</span>
+        <div class="series-card-info"><strong>No.04 — Vienna</strong><span>Rest is progress too.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/哥本哈根.jpg" alt="Copenhagen" style="object-fit:cover;" />
+        <span class="series-card-num">No.05 / 25</span>
+        <div class="series-card-info"><strong>No.05 — Copenhagen</strong><span>The sun always returns.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/柏林.jpg" alt="Berlin" style="object-fit:cover;" />
+        <span class="series-card-num">No.06 / 25</span>
+        <div class="series-card-info"><strong>No.06 — Berlin</strong><span>Don't burn yourself to keep others warm.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/罗马.jpg" alt="Rome" style="object-fit:cover;" />
+        <span class="series-card-num">No.07 / 25</span>
+        <div class="series-card-info"><strong>No.07 — Rome</strong><span>Today is where your book begins.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/苏黎世.jpg" alt="Zurich" style="object-fit:cover;" />
+        <span class="series-card-num">No.08 / 25</span>
+        <div class="series-card-info"><strong>No.08 — Zurich</strong><span>Softness is not weakness.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/上海.jpg" alt="Shanghai" style="object-fit:cover;" />
+        <span class="series-card-num">No.09 / 25</span>
+        <div class="series-card-info"><strong>No.09 — Shanghai</strong><span>You don't need permission to shine.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/北京.jpg" alt="Beijing" style="object-fit:cover;" />
+        <span class="series-card-num">No.10 / 25</span>
+        <div class="series-card-info"><strong>No.10 — Beijing</strong><span>Your energy is sacred. Protect it.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/东京.jpg" alt="Tokyo" style="object-fit:cover;" />
+        <span class="series-card-num">No.11 / 25</span>
+        <div class="series-card-info"><strong>No.11 — Tokyo</strong><span>Progress, not perfection.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/首尔.jpg" alt="Seoul" style="object-fit:cover;" />
+        <span class="series-card-num">No.12 / 25</span>
+        <div class="series-card-info"><strong>No.12 — Seoul</strong><span>Every new beginning opens doors you couldn't see before.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/香港.jpg" alt="Hong Kong" style="object-fit:cover;" />
+        <span class="series-card-num">No.13 / 25</span>
+        <div class="series-card-info"><strong>No.13 — Hong Kong</strong><span>You're not a backup plan. You're a priority.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/台北.jpg" alt="Taipei" style="object-fit:cover;" />
+        <span class="series-card-num">No.14 / 25</span>
+        <div class="series-card-info"><strong>No.14 — Taipei</strong><span>It's okay to start over as many times as you need.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/纽约.jpg" alt="New York" style="object-fit:cover;" />
+        <span class="series-card-num">No.15 / 25</span>
+        <div class="series-card-info"><strong>No.15 — New York</strong><span>Your presence is the present.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/芝加哥.jpg" alt="Chicago" style="object-fit:cover;" />
+        <span class="series-card-num">No.16 / 25</span>
+        <div class="series-card-info"><strong>No.16 — Chicago</strong><span>You are not who you were yesterday. That is a beautiful thing.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/波士顿.jpg" alt="Boston" style="object-fit:cover;" />
+        <span class="series-card-num">No.17 / 25</span>
+        <div class="series-card-info"><strong>No.17 — Boston</strong><span>Know your worth, then add tax.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/Aspen.jpg" alt="Aspen" style="object-fit:cover;" />
+        <span class="series-card-num">No.18 / 25</span>
+        <div class="series-card-info"><strong>No.18 — Aspen</strong><span>Run your race at your pace.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/西雅图.jpg" alt="Seattle" style="object-fit:cover;" />
+        <span class="series-card-num">No.19 / 25</span>
+        <div class="series-card-info"><strong>No.19 — Seattle</strong><span>It's okay to not be okay.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/温哥华.jpg" alt="Vancouver" style="object-fit:cover;" />
+        <span class="series-card-num">No.20 / 25</span>
+        <div class="series-card-info"><strong>No.20 — Vancouver</strong><span>She's not the same girl you met last year.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/墨西哥城.jpg" alt="Mexico City" style="object-fit:cover;" />
+        <span class="series-card-num">No.21 / 25</span>
+        <div class="series-card-info"><strong>No.21 — Mexico City</strong><span>Date yourself. Buy yourself flowers.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/夏威夷.jpg" alt="Hawaii" style="object-fit:cover;" />
+        <span class="series-card-num">No.22 / 25</span>
+        <div class="series-card-info"><strong>No.22 — Hawaii</strong><span>Miracles happen every day. You're one of them.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/里约热内卢.jpg" alt="Rio de Janeiro" style="object-fit:cover;" />
+        <span class="series-card-num">No.23 / 25</span>
+        <div class="series-card-info"><strong>No.23 — Rio de Janeiro</strong><span>You're your own soulmate first.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/旧金山.jpg" alt="San Francisco" style="object-fit:cover;" />
+        <span class="series-card-num">No.24 / 25</span>
+        <div class="series-card-info"><strong>No.24 — San Francisco</strong><span>Your vibe attracts your tribe.</span></div>
+      </div>
+
+      <div class="series-card">
+        <img class="series-card-bg" src="images/洛杉矶.jpg" alt="Los Angeles" style="object-fit:cover;" />
+        <span class="series-card-num">No.25 / 25</span>
+        <div class="series-card-info"><strong>No.25 — Los Angeles</strong><span>Dancing through life like it's a movie scene.</span></div>
+      </div>
+
+    </div><!-- /series-track -->
+
+    <!-- Progress bar -->
+    <div class="series-progress-wrap">
+      <div class="series-progress-bar" id="seriesProgress"></div>
+    </div>
+  </div><!-- /series-gallery-wrap -->
 </section>
 
 <section id="collab">
@@ -1590,7 +1759,7 @@
     requestAnimationFrame(animRing);
   })();
 
-  document.querySelectorAll('a, button, .product-card, .how-step, .collab-card, .series-art-card').forEach(el => {
+  document.querySelectorAll('a, button, .product-card, .how-step, .collab-card, .series-card').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
@@ -1727,6 +1896,41 @@
     songProgress.style.width = '0%';
     songText.textContent = 'tap to play ✦';
   });
+
+  // ─── Series gallery drag + progress ───
+  var seriesTrack    = document.getElementById('seriesTrack');
+  var seriesProgress = document.getElementById('seriesProgress');
+
+  if (seriesTrack && seriesProgress) {
+    var isDragging = false, dragStartX = 0, dragScrollLeft = 0;
+
+    function updateSeriesProgress() {
+      var max = seriesTrack.scrollWidth - seriesTrack.clientWidth;
+      var pct = max > 0 ? seriesTrack.scrollLeft / max : 0;
+      seriesProgress.style.width = Math.max(4, pct * 96 + 4) + '%';
+    }
+
+    seriesTrack.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      seriesTrack.classList.add('dragging');
+      dragStartX = e.pageX - seriesTrack.getBoundingClientRect().left;
+      dragScrollLeft = seriesTrack.scrollLeft;
+    });
+
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      seriesTrack.classList.remove('dragging');
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      var x = e.pageX - seriesTrack.getBoundingClientRect().left;
+      seriesTrack.scrollLeft = dragScrollLeft - (x - dragStartX);
+      updateSeriesProgress();
+    });
+
+    seriesTrack.addEventListener('scroll', updateSeriesProgress);
+  }
 
   // ─── Form submit (placeholder) ───
   function handleFormSubmit(e) {

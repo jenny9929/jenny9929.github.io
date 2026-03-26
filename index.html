@@ -1427,9 +1427,9 @@
           <p>Mixed media digital art · NFC embedded</p>
         </div>
       </div>
-      <div class="product-card reveal reveal-delay-1">
-        <div class="product-img" style="background:linear-gradient(135deg,#E8F3EE,#C5DDD3);">
-          🗝
+      <div class="product-card reveal reveal-delay-1" id="card-keychain">
+        <div class="product-img" style="padding:0;">
+          <img src="images/钥匙扣.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
@@ -1437,9 +1437,9 @@
           <p>Resin craft · NFC embedded</p>
         </div>
       </div>
-      <div class="product-card reveal reveal-delay-2">
-        <div class="product-img" style="background:linear-gradient(135deg,#F5E8E0,#E8C8B8);">
-          🕯
+      <div class="product-card reveal reveal-delay-2" id="card-diffuser">
+        <div class="product-img" style="padding:0;">
+          <img src="images/香薰片.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
@@ -1447,13 +1447,13 @@
           <p>Aromatherapy · NFC embedded</p>
         </div>
       </div>
-      <div class="product-card reveal reveal-delay-3">
-        <div class="product-img" style="background:linear-gradient(135deg,#F0EBF5,#D8C5E8);">
-          🎁
+      <div class="product-card reveal reveal-delay-3" id="card-giftset">
+        <div class="product-img" style="padding:0;">
+          <img src="images/礼盒.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
-          <h4>Gift Sets</h4>
+          <h4>Silk Scarf Gift Set</h4>
           <p>Curated collections · NFC embedded</p>
         </div>
       </div>
@@ -2029,6 +2029,124 @@
 
 <audio id="modal-audio" playsinline></audio>
 
+<!-- ── Art Keychain modal ──────────────────────────────────────────────── -->
+<div id="nfc-modal-overlay-keychain" style="display:none; position:fixed; inset:0; background:rgba(28,26,23,0.85); z-index:500; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+  <div id="nfc-modal-card-keychain" style="position:relative; width:min(1100px,96vw); max-height:92vh; background:#2A2520; border:1px solid #C9A96E; border-radius:20px; overflow:hidden; display:flex; flex-direction:column;">
+    <button onclick="closeNFCModal_keychain()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#C9A96E; font-size:1.5rem; cursor:pointer; z-index:10;">×</button>
+    <div style="display:flex; align-items:stretch;">
+      <div style="width:60%; flex-shrink:0; min-height:580px; overflow:hidden; border-radius:19px 0 0 19px;">
+        <img id="modal-artwork-keychain" src="images/钥匙扣.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
+      </div>
+      <div id="modal-right-col-keychain" style="flex:1; position:relative; overflow:visible;">
+        <svg id="nfc-iphone-keychain" width="70" height="144" viewBox="0 0 70 144" style="cursor:grab; user-select:none; -webkit-user-select:none; touch-action:none; display:block; z-index:5; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5));">
+          <rect x="2" y="2" width="66" height="140" rx="13" fill="#1C1A17" stroke="#C9A96E" stroke-width="1.5"/>
+          <rect x="0" y="32" width="2" height="14" rx="1" fill="#3A3530"/>
+          <rect x="0" y="52" width="2" height="22" rx="1" fill="#3A3530"/>
+          <rect x="68" y="44" width="2" height="28" rx="1" fill="#3A3530"/>
+          <rect x="22" y="7" width="26" height="7" rx="3.5" fill="#0D0C0B"/>
+          <rect x="7" y="18" width="56" height="104" rx="5" fill="#1A1815"/>
+          <rect x="25" y="132" width="20" height="3" rx="1.5" fill="#3A3530"/>
+          <text id="iphone-note-keychain" x="35" y="63" text-anchor="middle" dominant-baseline="middle" fill="#C9A96E" font-size="30" font-family="Georgia,serif">♪</text>
+          <g id="iphone-playing-keychain" display="none">
+            <rect x="22" y="34" width="6" height="16" rx="3" fill="#C9A96E"><animate attributeName="height" values="16;7;16" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="34;38.5;34" dur="0.7s" repeatCount="indefinite"/></rect>
+            <rect x="32" y="31" width="6" height="22" rx="3" fill="#C9A96E"><animate attributeName="height" values="22;9;22" dur="0.7s" repeatCount="indefinite" begin="0.15s"/><animate attributeName="y" values="31;37;31" dur="0.7s" repeatCount="indefinite" begin="0.15s"/></rect>
+            <rect x="42" y="35" width="6" height="14" rx="3" fill="#C9A96E"><animate attributeName="height" values="14;6;14" dur="0.7s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="y" values="35;39;35" dur="0.7s" repeatCount="indefinite" begin="0.3s"/></rect>
+            <rect x="14" y="100" width="42" height="3" rx="1.5" fill="#2A2520"/>
+            <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
+          </g>
+        </svg>
+        <p id="modal-hint-keychain" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the keychain</p>
+      </div>
+    </div>
+    <div id="modal-player-keychain" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
+      <p style="color:#FAF7F2; font-family:'Cormorant Garamond',serif; font-size:1.1rem;">Perfect</p>
+      <p style="color:#9E948C; font-size:0.8rem; margin-top:0.25rem;">Ed Sheeran</p>
+      <div style="margin-top:1rem; height:2px; background:#3A3530; border-radius:2px; overflow:hidden;"><div id="modal-progress-keychain" style="height:100%; width:0%; background:#C9A96E; transition:width 0.5s;"></div></div>
+      <button id="modal-pause-btn-keychain" onclick="toggleModalAudio_keychain()" style="margin-top:1rem; background:transparent; border:1px solid #C9A96E; color:#C9A96E; border-radius:50px; padding:0.4rem 1.2rem; font-size:0.8rem; cursor:pointer; -webkit-appearance:none; appearance:none;">❚❚ Pause</button>
+    </div>
+  </div>
+</div>
+<audio id="modal-audio-keychain" playsinline></audio>
+
+<!-- ── Fragrance Diffuser modal ───────────────────────────────────────── -->
+<div id="nfc-modal-overlay-diffuser" style="display:none; position:fixed; inset:0; background:rgba(28,26,23,0.85); z-index:500; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+  <div id="nfc-modal-card-diffuser" style="position:relative; width:min(1100px,96vw); max-height:92vh; background:#2A2520; border:1px solid #C9A96E; border-radius:20px; overflow:hidden; display:flex; flex-direction:column;">
+    <button onclick="closeNFCModal_diffuser()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#C9A96E; font-size:1.5rem; cursor:pointer; z-index:10;">×</button>
+    <div style="display:flex; align-items:stretch;">
+      <div style="width:60%; flex-shrink:0; min-height:580px; overflow:hidden; border-radius:19px 0 0 19px;">
+        <img id="modal-artwork-diffuser" src="images/香薰片.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
+      </div>
+      <div id="modal-right-col-diffuser" style="flex:1; position:relative; overflow:visible;">
+        <svg id="nfc-iphone-diffuser" width="70" height="144" viewBox="0 0 70 144" style="cursor:grab; user-select:none; -webkit-user-select:none; touch-action:none; display:block; z-index:5; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5));">
+          <rect x="2" y="2" width="66" height="140" rx="13" fill="#1C1A17" stroke="#C9A96E" stroke-width="1.5"/>
+          <rect x="0" y="32" width="2" height="14" rx="1" fill="#3A3530"/>
+          <rect x="0" y="52" width="2" height="22" rx="1" fill="#3A3530"/>
+          <rect x="68" y="44" width="2" height="28" rx="1" fill="#3A3530"/>
+          <rect x="22" y="7" width="26" height="7" rx="3.5" fill="#0D0C0B"/>
+          <rect x="7" y="18" width="56" height="104" rx="5" fill="#1A1815"/>
+          <rect x="25" y="132" width="20" height="3" rx="1.5" fill="#3A3530"/>
+          <text id="iphone-note-diffuser" x="35" y="63" text-anchor="middle" dominant-baseline="middle" fill="#C9A96E" font-size="30" font-family="Georgia,serif">♪</text>
+          <g id="iphone-playing-diffuser" display="none">
+            <rect x="22" y="34" width="6" height="16" rx="3" fill="#C9A96E"><animate attributeName="height" values="16;7;16" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="34;38.5;34" dur="0.7s" repeatCount="indefinite"/></rect>
+            <rect x="32" y="31" width="6" height="22" rx="3" fill="#C9A96E"><animate attributeName="height" values="22;9;22" dur="0.7s" repeatCount="indefinite" begin="0.15s"/><animate attributeName="y" values="31;37;31" dur="0.7s" repeatCount="indefinite" begin="0.15s"/></rect>
+            <rect x="42" y="35" width="6" height="14" rx="3" fill="#C9A96E"><animate attributeName="height" values="14;6;14" dur="0.7s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="y" values="35;39;35" dur="0.7s" repeatCount="indefinite" begin="0.3s"/></rect>
+            <rect x="14" y="100" width="42" height="3" rx="1.5" fill="#2A2520"/>
+            <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
+          </g>
+        </svg>
+        <p id="modal-hint-diffuser" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the diffuser</p>
+      </div>
+    </div>
+    <div id="modal-player-diffuser" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
+      <p style="color:#FAF7F2; font-family:'Cormorant Garamond',serif; font-size:1.1rem;">What the World Gifted Me - Mandarin</p>
+      <p style="color:#9E948C; font-size:0.8rem; margin-top:0.25rem;">Faye Wong</p>
+      <div style="margin-top:1rem; height:2px; background:#3A3530; border-radius:2px; overflow:hidden;"><div id="modal-progress-diffuser" style="height:100%; width:0%; background:#C9A96E; transition:width 0.5s;"></div></div>
+      <button id="modal-pause-btn-diffuser" onclick="toggleModalAudio_diffuser()" style="margin-top:1rem; background:transparent; border:1px solid #C9A96E; color:#C9A96E; border-radius:50px; padding:0.4rem 1.2rem; font-size:0.8rem; cursor:pointer; -webkit-appearance:none; appearance:none;">❚❚ Pause</button>
+    </div>
+  </div>
+</div>
+<audio id="modal-audio-diffuser" playsinline></audio>
+
+<!-- ── Gift Sets modal ────────────────────────────────────────────────── -->
+<div id="nfc-modal-overlay-giftset" style="display:none; position:fixed; inset:0; background:rgba(28,26,23,0.85); z-index:500; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+  <div id="nfc-modal-card-giftset" style="position:relative; width:min(1100px,96vw); max-height:92vh; background:#2A2520; border:1px solid #C9A96E; border-radius:20px; overflow:hidden; display:flex; flex-direction:column;">
+    <button onclick="closeNFCModal_giftset()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#C9A96E; font-size:1.5rem; cursor:pointer; z-index:10;">×</button>
+    <div style="display:flex; align-items:stretch;">
+      <div style="width:60%; flex-shrink:0; min-height:580px; overflow:hidden; border-radius:19px 0 0 19px;">
+        <img id="modal-artwork-giftset" src="images/礼盒.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
+        <p style="text-align:center; color:#C9A96E; font-size:0.75rem; letter-spacing:0.08em; padding:0.5rem 1rem 0; margin:0;">✦ A curated silk scarf gift set — tap the NFC card inside to play</p>
+      </div>
+      <div id="modal-right-col-giftset" style="flex:1; position:relative; overflow:visible;">
+        <svg id="nfc-iphone-giftset" width="70" height="144" viewBox="0 0 70 144" style="cursor:grab; user-select:none; -webkit-user-select:none; touch-action:none; display:block; z-index:5; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5));">
+          <rect x="2" y="2" width="66" height="140" rx="13" fill="#1C1A17" stroke="#C9A96E" stroke-width="1.5"/>
+          <rect x="0" y="32" width="2" height="14" rx="1" fill="#3A3530"/>
+          <rect x="0" y="52" width="2" height="22" rx="1" fill="#3A3530"/>
+          <rect x="68" y="44" width="2" height="28" rx="1" fill="#3A3530"/>
+          <rect x="22" y="7" width="26" height="7" rx="3.5" fill="#0D0C0B"/>
+          <rect x="7" y="18" width="56" height="104" rx="5" fill="#1A1815"/>
+          <rect x="25" y="132" width="20" height="3" rx="1.5" fill="#3A3530"/>
+          <text id="iphone-note-giftset" x="35" y="63" text-anchor="middle" dominant-baseline="middle" fill="#C9A96E" font-size="30" font-family="Georgia,serif">♪</text>
+          <g id="iphone-playing-giftset" display="none">
+            <rect x="22" y="34" width="6" height="16" rx="3" fill="#C9A96E"><animate attributeName="height" values="16;7;16" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="34;38.5;34" dur="0.7s" repeatCount="indefinite"/></rect>
+            <rect x="32" y="31" width="6" height="22" rx="3" fill="#C9A96E"><animate attributeName="height" values="22;9;22" dur="0.7s" repeatCount="indefinite" begin="0.15s"/><animate attributeName="y" values="31;37;31" dur="0.7s" repeatCount="indefinite" begin="0.15s"/></rect>
+            <rect x="42" y="35" width="6" height="14" rx="3" fill="#C9A96E"><animate attributeName="height" values="14;6;14" dur="0.7s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="y" values="35;39;35" dur="0.7s" repeatCount="indefinite" begin="0.3s"/></rect>
+            <rect x="14" y="100" width="42" height="3" rx="1.5" fill="#2A2520"/>
+            <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
+          </g>
+        </svg>
+        <p id="modal-hint-giftset" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone to the NFC card (top right)</p>
+      </div>
+    </div>
+    <div id="modal-player-giftset" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
+      <p style="color:#FAF7F2; font-family:'Cormorant Garamond',serif; font-size:1.1rem;">Somewhere over the Rainbow - Hawaiian version</p>
+      <p style="color:#9E948C; font-size:0.8rem; margin-top:0.25rem;">Israel "IZ" Kamakawiwoʻole</p>
+      <div style="margin-top:1rem; height:2px; background:#3A3530; border-radius:2px; overflow:hidden;"><div id="modal-progress-giftset" style="height:100%; width:0%; background:#C9A96E; transition:width 0.5s;"></div></div>
+      <button id="modal-pause-btn-giftset" onclick="toggleModalAudio_giftset()" style="margin-top:1rem; background:transparent; border:1px solid #C9A96E; color:#C9A96E; border-radius:50px; padding:0.4rem 1.2rem; font-size:0.8rem; cursor:pointer; -webkit-appearance:none; appearance:none;">❚❚ Pause</button>
+    </div>
+  </div>
+</div>
+<audio id="modal-audio-giftset" playsinline></audio>
+
 <script>
 (function() {
   var modalOverlay  = document.getElementById('nfc-modal-overlay');
@@ -2345,6 +2463,298 @@
   var paintingCard = document.getElementById('card-painting');
   if (paintingCard) paintingCard.addEventListener('click', openNFCModal);
 })();
+
+// ── 其他三个 NFC 弹窗（共用工厂函数） ──────────────────────────────────────
+(function() {
+  function createNFCModal(opts) {
+    var S          = opts.suffix;
+    var overlay    = document.getElementById('nfc-modal-overlay-' + S);
+    var card       = document.getElementById('nfc-modal-card-' + S);
+    var audio      = document.getElementById('modal-audio-' + S);
+    var hint       = document.getElementById('modal-hint-' + S);
+    var player     = document.getElementById('modal-player-' + S);
+    var progress   = document.getElementById('modal-progress-' + S);
+    var pauseBtn   = document.getElementById('modal-pause-btn-' + S);
+    var artwork    = document.getElementById('modal-artwork-' + S);
+    var rightCol   = document.getElementById('modal-right-col-' + S);
+    if (!overlay || !card || !audio) return;
+
+    var modalReady   = false;
+    var modalPlaying = false;
+    var progressTimer = null;
+    var nfcTriggered  = false;
+
+    async function loadAudio() {
+      try {
+        var response = await fetch('https://jennyhaus.com/audio/' + opts.audioFile);
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        var blob = await response.blob();
+        audio.src = URL.createObjectURL(blob);
+        audio.load();
+        modalReady = true;
+      } catch(err) {
+        hint.textContent = '⚠ ' + err.message;
+        hint.style.display = 'block';
+      }
+    }
+
+    function updateProgress() {
+      clearInterval(progressTimer);
+      progressTimer = setInterval(function() {
+        if (audio.duration) {
+          progress.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        }
+        if (audio.ended) {
+          clearInterval(progressTimer);
+          modalPlaying = false;
+          pauseBtn.textContent = '▶ Play again';
+        }
+      }, 500);
+    }
+
+    function doPlayAudio() {
+      hint.style.display = 'none';
+      player.style.display = 'block';
+      rightCol.style.minHeight = '140px';
+      var p = audio.play();
+      if (p !== undefined) {
+        p.then(function() {
+          modalPlaying = true;
+          pauseBtn.textContent = '❚❚ Pause';
+          updateProgress();
+        }).catch(function(err) {
+          hint.style.display = 'block';
+          hint.textContent = '⚠ ' + err.name + ': ' + err.message;
+        });
+      }
+    }
+
+    function triggerPlay(ix, iy) {
+      var ar = artwork.getBoundingClientRect();
+      var ripple = document.createElement('div');
+      ripple.style.cssText = 'position:absolute;border-radius:50%;background:rgba(201,169,110,0.35);transform:scale(0);animation:ripple 0.9s ease-out forwards;pointer-events:none;width:220px;height:220px;left:'+(ix-ar.left-110)+'px;top:'+(iy-ar.top-110)+'px;';
+      artwork.parentElement.appendChild(ripple);
+      setTimeout(function(){ ripple.remove(); }, 900);
+      setTimeout(function() {
+        var note = document.getElementById('iphone-note-' + S);
+        var bars = document.getElementById('iphone-playing-' + S);
+        if (note) note.setAttribute('display', 'none');
+        if (bars) bars.setAttribute('display', 'block');
+        if (!modalReady) { hint.textContent = '✦ Still loading...'; return; }
+        if (!modalPlaying) doPlayAudio();
+      }, 600);
+    }
+
+    // ── 鼠标拖拽 ──────────────────────────────────────────────────────────
+    var desktopDragSetup = false;
+    function setupDesktopDrag() {
+      var iphone = document.getElementById('nfc-iphone-' + S);
+      if (!iphone || !artwork || !rightCol) return;
+
+      if (desktopDragSetup) {
+        nfcTriggered = false;
+        iphone.style.position = '';
+        iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+        iphone.style.left = ''; iphone.style.top = '';
+        setTimeout(function(){ iphone.style.transition = ''; }, 450);
+        return;
+      }
+      desktopDragSetup = true;
+
+      var mouseDragging = false, mouseOffX, mouseOffY;
+
+      iphone.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        mouseDragging = true;
+        iphone.style.transition = '';
+        iphone.style.cursor = 'grabbing';
+        document.body.style.cursor = 'grabbing';
+        var ir = iphone.getBoundingClientRect();
+        var rr = rightCol.getBoundingClientRect();
+        iphone.style.left = (ir.left - rr.left) + 'px';
+        iphone.style.top  = (ir.top  - rr.top)  + 'px';
+        mouseOffX = e.clientX - ir.left;
+        mouseOffY = e.clientY - ir.top;
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!mouseDragging) return;
+        var rr = rightCol.getBoundingClientRect();
+        iphone.style.left = (e.clientX - mouseOffX - rr.left) + 'px';
+        iphone.style.top  = (e.clientY - mouseOffY - rr.top)  + 'px';
+        var ir = iphone.getBoundingClientRect();
+        var ar = artwork.getBoundingClientRect();
+        var ix = ir.left + ir.width / 2, iy = ir.top + ir.height / 2;
+        var triggered = S === 'giftset'
+          ? (function(){ var zx=ar.left+ar.width*0.55, zy=ar.top, zw=ar.width*0.45, zh=ar.height*0.45; return ix>zx&&ix<zx+zw&&iy>zy&&iy<zy+zh; })()
+          : Math.sqrt(Math.pow(ix-(ar.left+ar.width/2),2)+Math.pow(iy-(ar.top+ar.height/2),2)) < 120;
+        if (triggered) {
+          mouseDragging = false;
+          document.body.style.cursor = '';
+          iphone.style.cursor = 'grab';
+          iphone.style.transition = 'left 0.6s ease-out, top 0.6s ease-out';
+          iphone.style.left = ''; iphone.style.top = '';
+          triggerPlay(ix, iy);
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (!mouseDragging) return;
+        mouseDragging = false;
+        document.body.style.cursor = '';
+        iphone.style.cursor = 'grab';
+        iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+        iphone.style.left = ''; iphone.style.top = '';
+        setTimeout(function(){ iphone.style.transition = ''; }, 450);
+      });
+    }
+
+    // ── 触摸拖拽 ──────────────────────────────────────────────────────────
+    var touchDragging = false, touchOffsetX = 0, touchOffsetY = 0;
+    var iphoneInitRect = null, touchTriggered = false, touchDragSetup = false;
+
+    function bindTouchDrag() {
+      if (touchDragSetup) return;
+      touchDragSetup = true;
+      var iphone = document.getElementById('nfc-iphone-' + S);
+      if (!iphone || !artwork) return;
+
+      iphone.addEventListener('touchstart', function(e) {
+        e.preventDefault(); e.stopPropagation();
+        touchDragging = true; touchTriggered = false;
+        iphone.style.transition = '';
+        var rect = iphone.getBoundingClientRect();
+        iphoneInitRect = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+        iphone.style.position = 'fixed'; iphone.style.zIndex = '9999';
+        iphone.style.left = rect.left + 'px'; iphone.style.top = rect.top + 'px';
+        iphone.style.width = rect.width + 'px'; iphone.style.height = rect.height + 'px';
+        touchOffsetX = e.touches[0].clientX - rect.left - rect.width  / 2;
+        touchOffsetY = e.touches[0].clientY - rect.top  - rect.height / 2;
+      }, { passive: false });
+
+      iphone.addEventListener('touchmove', function(e) {
+        if (!touchDragging) return;
+        e.preventDefault();
+        var touch = e.touches[0];
+        iphone.style.left = (touch.clientX - touchOffsetX - iphoneInitRect.width  / 2) + 'px';
+        iphone.style.top  = (touch.clientY - touchOffsetY - iphoneInitRect.height / 2) + 'px';
+        var ar = artwork.getBoundingClientRect();
+        var ix = touch.clientX - touchOffsetX, iy = touch.clientY - touchOffsetY;
+        var triggered = S === 'giftset'
+          ? (function(){ var zx=ar.left+ar.width*0.55, zy=ar.top, zw=ar.width*0.45, zh=ar.height*0.45; return ix>zx&&ix<zx+zw&&iy>zy&&iy<zy+zh; })()
+          : Math.sqrt(Math.pow(ix-(ar.left+ar.width/2),2)+Math.pow(iy-(ar.top+ar.height/2),2)) < 80;
+        if (triggered && !touchTriggered) {
+          touchTriggered = true; touchDragging = false;
+          iphone.style.transition = 'left 0.6s ease-out, top 0.6s ease-out';
+          iphone.style.left = iphoneInitRect.left + 'px'; iphone.style.top = iphoneInitRect.top + 'px';
+          setTimeout(function() {
+            iphone.style.position = ''; iphone.style.left = ''; iphone.style.top = '';
+            iphone.style.width = iphone.style.height = '';
+            iphone.style.transition = iphone.style.zIndex = '';
+          }, 600);
+          var ar2 = artwork.getBoundingClientRect();
+          var ripple = document.createElement('div');
+          ripple.style.cssText = 'position:absolute;border-radius:50%;background:rgba(201,169,110,0.35);transform:scale(0);animation:ripple 0.9s ease-out forwards;pointer-events:none;width:220px;height:220px;left:'+(ix-ar2.left-110)+'px;top:'+(iy-ar2.top-110)+'px;';
+          artwork.parentElement.style.position = 'relative';
+          artwork.parentElement.appendChild(ripple);
+          setTimeout(function(){ ripple.remove(); }, 900);
+          var note = document.getElementById('iphone-note-' + S);
+          var bars = document.getElementById('iphone-playing-' + S);
+          if (note) note.setAttribute('display','none');
+          if (bars) bars.setAttribute('display','block');
+          if (modalReady && !modalPlaying) {
+            hint.style.display = 'none';
+            player.style.display = 'block';
+            rightCol.style.minHeight = '140px';
+            audio.play().then(function() {
+              modalPlaying = true;
+              pauseBtn.textContent = '❚❚ Pause';
+              updateProgress();
+            }).catch(function(err) {
+              hint.style.display = 'block';
+              hint.textContent = '⚠ ' + err.name;
+            });
+          }
+        }
+      }, { passive: false });
+
+      iphone.addEventListener('touchend', function() {
+        if (!touchDragging) return;
+        touchDragging = false;
+        iphone.style.transition = 'left 0.5s ease, top 0.5s ease';
+        iphone.style.left = iphoneInitRect.left + 'px'; iphone.style.top = iphoneInitRect.top + 'px';
+        setTimeout(function() {
+          iphone.style.position = ''; iphone.style.left = ''; iphone.style.top = '';
+          iphone.style.width = iphone.style.height = '';
+          iphone.style.transition = iphone.style.zIndex = '';
+        }, 500);
+      });
+    }
+
+    window['toggleModalAudio_' + S] = function() {
+      if (modalPlaying) {
+        audio.pause(); modalPlaying = false;
+        pauseBtn.textContent = '▶ Play';
+        clearInterval(progressTimer);
+      } else {
+        audio.play(); modalPlaying = true;
+        pauseBtn.textContent = '❚❚ Pause';
+        updateProgress();
+      }
+    };
+
+    window['closeNFCModal_' + S] = function() {
+      card.style.animation = 'modal-out 0.35s ease-in forwards';
+      setTimeout(function() {
+        overlay.style.display = 'none';
+        card.style.animation = '';
+        audio.pause(); audio.currentTime = 0;
+        modalPlaying = false;
+        clearInterval(progressTimer);
+        progress.style.width = '0%';
+        hint.style.display = 'block';
+        player.style.display = 'none';
+        rightCol.style.minHeight = '';
+        pauseBtn.textContent = '❚❚ Pause';
+        nfcTriggered = false;
+        var iphone = document.getElementById('nfc-iphone-' + S);
+        if (iphone) {
+          iphone.style.transition = ''; iphone.style.position = '';
+          iphone.style.left = ''; iphone.style.top = '';
+          iphone.style.width = ''; iphone.style.height = '';
+          iphone.style.zIndex = ''; iphone.style.cursor = 'grab';
+        }
+        var note = document.getElementById('iphone-note-' + S);
+        var bars = document.getElementById('iphone-playing-' + S);
+        if (note) note.setAttribute('display', 'block');
+        if (bars) bars.setAttribute('display', 'none');
+      }, 350);
+    };
+
+    window['openNFCModal_' + S] = function() {
+      overlay.style.display = 'flex';
+      card.style.animation = 'modal-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards';
+      audio.muted = true;
+      audio.play().then(function(){ audio.pause(); audio.muted = false; }).catch(function(err){ console.warn(err); });
+      if (!modalReady) loadAudio();
+      setupDesktopDrag();
+      setTimeout(bindTouchDrag, 100);
+    };
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) window['closeNFCModal_' + S]();
+    });
+
+    loadAudio();
+
+    var cardEl = document.getElementById('card-' + S);
+    if (cardEl) cardEl.addEventListener('click', window['openNFCModal_' + S]);
+  }
+
+  createNFCModal({ suffix: 'keychain', audioFile: 'perfect.mp3' });
+  createNFCModal({ suffix: 'diffuser', audioFile: 'beijing.mp3' });
+  createNFCModal({ suffix: 'giftset',  audioFile: 'hawaii.mp3'  });
+})();
 </script>
 
 <style>
@@ -2363,7 +2773,9 @@
 #nfc-modal-overlay.open { display: flex !important; }
 #card-painting { cursor: pointer; }
 #card-painting:hover { transform: translateY(-4px); transition: transform 0.3s; }
-#nfc-iphone { position: absolute; left: calc(50% - 35px); top: calc(50% - 72px); }
+#nfc-iphone, #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset { position: absolute; left: calc(50% - 35px); top: calc(50% - 72px); }
+#card-keychain, #card-diffuser, #card-giftset { cursor: pointer; }
+#card-keychain:hover, #card-diffuser:hover, #card-giftset:hover { transform: translateY(-4px); transition: transform 0.3s; }
 
 @media (max-width: 768px) {
   #nfc-modal-card { width: min(96vw, 480px) !important; max-height: 92vh !important; overflow-y: auto !important; }
@@ -2398,6 +2810,38 @@
     top: 24px;
   }
   #modal-player {
+    padding-top: 8px !important;
+  }
+  /* ── 新增三个弹窗的手机端适配 ── */
+  #nfc-modal-card-keychain, #nfc-modal-card-diffuser, #nfc-modal-card-giftset {
+    width: min(96vw, 480px) !important; max-height: 92vh !important; overflow-y: auto !important;
+  }
+  #nfc-modal-card-keychain > div:first-of-type,
+  #nfc-modal-card-diffuser > div:first-of-type,
+  #nfc-modal-card-giftset  > div:first-of-type {
+    flex-direction: column !important; overflow: visible !important;
+  }
+  #nfc-modal-card-keychain > div:first-of-type > div:first-child,
+  #nfc-modal-card-diffuser > div:first-of-type > div:first-child,
+  #nfc-modal-card-giftset  > div:first-of-type > div:first-child {
+    width: 100% !important; min-height: 0 !important; height: auto !important;
+    border-radius: 19px 19px 0 0 !important; background: #1C1A17 !important;
+  }
+  #modal-artwork-keychain, #modal-artwork-diffuser, #modal-artwork-giftset {
+    width: 100% !important; height: auto !important;
+    aspect-ratio: 1/1 !important; object-fit: contain !important; object-position: center !important;
+  }
+  #modal-right-col-keychain, #modal-right-col-diffuser, #modal-right-col-giftset {
+    min-height: 200px; position: relative !important; overflow: visible !important;
+  }
+  #modal-hint-keychain, #modal-hint-diffuser, #modal-hint-giftset {
+    position: absolute !important; bottom: 1rem !important; top: auto !important;
+  }
+  #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset {
+    position: absolute; width: 48px; height: 100px;
+    left: calc(50% - 24px); top: 24px;
+  }
+  #modal-player-keychain, #modal-player-diffuser, #modal-player-giftset {
     padding-top: 8px !important;
   }
 }

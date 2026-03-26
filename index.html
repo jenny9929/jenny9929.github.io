@@ -1465,7 +1465,7 @@
   <!-- Header -->
   <div class="series-header reveal">
     <p class="section-label">Original Series</p>
-    <h2 class="section-title">The World Opens<br><em style="color:var(--gold);">for Her.</em></h2>
+    <h2 class="section-title">The World Opens<br><em style="color:var(--gold);">for Her</em></h2>
     <blockquote class="manifesto-quote">"You can go anywhere, become anyone — unbounded."</blockquote>
     <p class="series-intro">A collection of 25 works dedicated to women who refuse to be defined.</p>
     <a href="#collab" class="btn btn-outline">Commission a Piece</a>
@@ -1680,7 +1680,7 @@
       <div class="contact-form">
         <h3>Start a Conversation</h3>
         <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:0.5rem;">Tell me about your vision and I'll get back to you within 72 hours.</p>
-        <form action="https://formspree.io/f/mojpqpdr" method="POST">
+        <form id="contactForm" action="https://formspree.io/f/mojpqpdr" method="POST">
         <div class="form-group">
           <label>Your Name</label>
           <input type="text" name="name" placeholder="Jane Smith" required />
@@ -1704,7 +1704,7 @@
           <label>Message</label>
           <textarea name="message" placeholder="Tell me about your project, brand, or idea..." required></textarea>
         </div>
-        <button class="btn btn-gold" style="width:100%; justify-content:center;" type="submit">
+        <button id="contactBtn" class="btn btn-gold" style="width:100%; justify-content:center;" type="submit">
           Send Message →
         </button>
         </form>
@@ -1719,9 +1719,9 @@
       <div class="footer-brand">
         <h3><span>Jenny</span>DIYCorner</h3>
         <p>Where sound meets soul. Born in the Bay Area, crafted for the world. I create NFC-embedded tech art for collectors and brands who seek the intersection of innovation and soul.</p>
-        <form class="subscribe-form" action="https://formspree.io/f/xeepqpgv" method="POST">
+        <form id="subscribeForm" class="subscribe-form" action="https://formspree.io/f/xeepqpgv" method="POST">
           <input type="email" name="email" placeholder="Your email address" required />
-          <button type="submit">Subscribe</button>
+          <button id="subscribeBtn" type="submit">Subscribe</button>
         </form>
         <div class="social-links" style="margin-top:1.25rem;">
           <a class="social-link" href="#" aria-label="Instagram">🎨</a>
@@ -1950,17 +1950,52 @@
     seriesTrack.addEventListener('scroll', updateSeriesProgress);
   }
 
-  // ─── Form submit (placeholder) ───
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    const btn = e.target;
-    btn.textContent = 'Message sent! ✓';
-    btn.style.background = '#6A9E70';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.style.background = '';
-    }, 3000);
+  // ─── Form submit (Formspree AJAX) ───
+  function setupFormSubmit(formId, btnId, successText, resetText) {
+    var form = document.getElementById(formId);
+    var btn  = document.getElementById(btnId);
+    if (!form || !btn) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          btn.textContent = successText;
+          btn.style.background = '#6A9E70';
+          form.reset();
+          setTimeout(function() {
+            btn.textContent = resetText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          btn.textContent = 'Error — please try again';
+          btn.style.background = '#c0392b';
+          setTimeout(function() {
+            btn.textContent = resetText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        }
+      }).catch(function() {
+        btn.textContent = 'Error — please try again';
+        btn.style.background = '#c0392b';
+        setTimeout(function() {
+          btn.textContent = resetText;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      });
+    });
   }
+
+  setupFormSubmit('contactForm',   'contactBtn',   'Message sent! ✓',  'Send Message →');
+  setupFormSubmit('subscribeForm', 'subscribeBtn', 'Subscribed! ✨',    'Subscribe');
 </script>
 
 

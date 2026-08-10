@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JennyDIYCorner — Art You Can Hear</title>
+  <title>Jenny DIY Corner — NFC 艺术</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,8 +22,8 @@
       --text-mid:   #6B5F56;
       --text-light: #9E948C;
       --white:      #FFFFFF;
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'DM Sans', system-ui, sans-serif;
+      --serif:      'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', serif;
+      --sans:       'DM Sans', 'Noto Sans SC', 'PingFang SC', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -1259,25 +1260,25 @@
 
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-nav-close" id="mobileNavClose">✕</button>
-  <a href="#about" onclick="closeMobileNav()">Story</a>
-  <a href="#nfc" onclick="closeMobileNav()">NFC Art</a>
-  <a href="#series" onclick="closeMobileNav()">Series</a>
-  <a href="#collab" onclick="closeMobileNav()">Collaborate</a>
-  <a href="zh.html" class="lang-switch" onclick="closeMobileNav()">中文</a>
+  <a href="#about" onclick="closeMobileNav()">故事</a>
+  <a href="#nfc" onclick="closeMobileNav()">NFC 艺术</a>
+  <a href="#series" onclick="closeMobileNav()">系列</a>
+  <a href="#collab" onclick="closeMobileNav()">合作</a>
+  <a href="index.html" class="lang-switch" onclick="closeMobileNav()">EN</a>
 </div>
 
 <nav id="navbar">
   <div class="container nav-inner">
     <a class="nav-logo" href="#"><span>Jenny</span>DIYCorner</a>
     <ul class="nav-links">
-      <li><a href="#about">Story</a></li>
-      <li><a href="#nfc">NFC Art</a></li>
-      <li><a href="#series">Series</a></li>
-      <li><a href="#collab">Collaborate</a></li>
-      <li><a href="zh.html" class="lang-switch">中文</a></li>
+      <li><a href="#about">故事</a></li>
+      <li><a href="#nfc">NFC 艺术</a></li>
+      <li><a href="#series">系列</a></li>
+      <li><a href="#collab">合作</a></li>
+      <li><a href="index.html" class="lang-switch">EN</a></li>
     </ul>
-    <a href="#collab" class="btn btn-gold nav-cta">Let's Create Together</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <a href="#collab" class="btn btn-gold nav-cta">开始合作</a>
+    <button class="hamburger" id="hamburger" aria-label="打开菜单">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -1288,17 +1289,17 @@
   <div class="hero-bg-orb orb-2"></div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <div class="hero-eyebrow">Bay Area Independent Artist</div>
+      <div class="hero-eyebrow">手工 NFC 艺术</div>
       <h1 class="hero-title">
-        Art you<br>
-        <em>can hear</em>
+        艺术，<br>
+        <em>有声音。</em>
       </h1>
       <p class="hero-sub">
-        Where technology meets creativity — NFC-embedded art that unlocks a personal soundscape with a single touch. Tap, listen, feel.
+        每一件作品，都藏着一首歌。轻触即听——无需应用，无需蓝牙，只需一次触碰。
       </p>
       <div class="hero-actions">
-        <a href="#nfc" class="btn btn-gold">Explore NFC Art</a>
-        <a href="#series" class="btn btn-outline">View Series</a>
+        <a href="#nfc" class="btn btn-gold">探索作品系列</a>
+        <a href="#series" class="btn btn-outline">了解创作原理</a>
       </div>
     </div>
 
@@ -1322,14 +1323,14 @@
             </svg>
           </div>
         </div>
-        <div class="phone" id="nfcPhone" title="Tap to play">
+        <div class="phone" id="nfcPhone" title="点击播放">
           <div class="phone-notch"></div>
           <div class="phone-screen" id="phoneScreen">
             <div class="phone-music-icon idle" id="musicIcon">♪</div>
             <div class="phone-song-bar">
               <div class="phone-song-progress" id="songProgress"></div>
             </div>
-            <div class="phone-song-text" id="songText">tap to play ✦</div>
+            <div class="phone-song-text" id="songText">点击播放 ✦</div>
           </div>
         </div>
         <div class="nfc-waves" id="nfcWaves">
@@ -1337,7 +1338,7 @@
           <div class="wave-ring"></div>
           <div class="wave-ring"></div>
         </div>
-        <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
+        <div class="phone-tap-hint">☝ 点击手机播放 · NFC 体验</div>
         <audio id="nfcAudio" loop playsinline></audio>
       </div>
     </div>
@@ -1350,7 +1351,7 @@
       <div class="about-image-main">
         <img src="images/jenny-photo.jpg" alt="Jenny" style="width:100%;height:100%;object-fit:cover;object-position:bottom;border-radius:24px;"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-        <span style="font-size:0.75rem;letter-spacing:0.08em;color:var(--text-light);display:none;">[ Your Photo Here ]</span>
+        <span style="font-size:0.75rem;letter-spacing:0.08em;color:var(--text-light);display:none;">[ 你的照片 ]</span>
       </div>
       <div class="about-image-accent">
         <img src="images/studio.jpg" alt="Jenny's Studio" style="width:100%;height:100%;object-fit:cover;" />
@@ -1358,41 +1359,41 @@
     </div>
 
     <div class="about-text reveal reveal-delay-1">
-      <p class="section-label">About Jenny</p>
-      <h2 class="section-title">Art found me when I<br>had something <em>to say.</em></h2>
-      <p class="section-title" style="font-size:clamp(1.1rem,2vw,1.4rem); font-weight:300; font-style:italic; color:var(--gold); margin-top:-0.75rem; margin-bottom:1.25rem;">And I haven't stopped since.</p>
+      <p class="section-label">关于艺术家</p>
+      <h2 class="section-title">源于代码，<br>绘就 <em>灵魂。</em></h2>
+      <p class="section-title" style="font-size:clamp(1.1rem,2vw,1.4rem); font-weight:300; font-style:italic; color:var(--gold); margin-top:-0.75rem; margin-bottom:1.25rem;">从未停止。</p>
       <div class="about-tags">
-        <span class="tag tag-gold">Cross-Industry</span>
-        <span class="tag tag-mint">Independent Artist</span>
-        <span class="tag tag-blush">Bay Area</span>
-        <span class="tag tag-gold">NFC Pioneer</span>
+        <span class="tag tag-gold">跨界创作</span>
+        <span class="tag tag-mint">独立艺术家</span>
+        <span class="tag tag-blush">湾区</span>
+        <span class="tag tag-gold">NFC 先行者</span>
       </div>
       <p class="section-body" style="margin-top:0.25rem;">
-        Grew up in China, educated across Switzerland, Germany, and the US, and built a career spanning law, finance, and tech. Along the way, I felt something most women know but rarely say out loud — the invisible weight of being expected to fit a mold that was never made for you. <span style="color:var(--gold);">That feeling became the reason I created "The World Opens for Her": art as an act of encouragement, for every woman who has ever wanted to break free and see what the world holds for her.</span>
+        我是 Jenny——科技与艺术的交汇处，是我最熟悉的地方。<span style="color:var(--gold);">从中国出发，辗转瑞士、德国与美国，经历法律、金融与科技行业，直到在湾区找到了属于自己的语言——NFC 艺术。</span>
       </p>
       <p class="section-body" style="margin-top:1.25rem;">
-        Now based in the Bay Area, I couldn't help but ask: what if art and technology could speak the same language? That question became <span style="color:var(--gold);">NFC ART</span>. My pieces have since reached tech professionals and companies across the US. I was among the first in the Bay Area to create tech art gift sets, where hand-crafted gift sets tell a company's story through art.
+        在湾区的工作经历让我深刻感受到科技的力量，而对绘画和手作的热爱，让我始终渴望在理性之外寻找另一种表达。<span style="color:var(--gold);">NFC 艺术</span>，就是这两个世界最自然的相遇。
       </p>
       <div class="journey-steps">
         <div class="journey-step">
           <div class="step-dot">⚖</div>
           <div class="step-text">
-            <strong>Legal &amp; Finance World</strong>
-            <span>Learned to spot what's overlooked — and speak up for it</span>
+            <strong>法律与金融</strong>
+            <span>学会发现被忽视的价值，并为之发声</span>
           </div>
         </div>
         <div class="journey-step">
           <div class="step-dot">💻</div>
           <div class="step-text">
-            <strong>Tech Industry</strong>
-            <span>Discovered the power of technology to transform experience</span>
+            <strong>科技行业</strong>
+            <span>感受科技改变体验的力量</span>
           </div>
         </div>
         <div class="journey-step">
           <div class="step-dot">🎨</div>
           <div class="step-text">
             <strong>Jenny DIY Corner</strong>
-            <span>Where cross-industry vision became tech art · Born in the Bay Area</span>
+            <span>跨界视野在此化为 NFC 艺术 · 诞生于湾区</span>
           </div>
         </div>
       </div>
@@ -1403,10 +1404,10 @@
 <section id="nfc">
   <div class="container">
     <div class="nfc-header reveal">
-      <p class="section-label">The Technology</p>
-      <h2 class="section-title">Art with an <em>invisible layer</em></h2>
+      <p class="section-label">关于技术</p>
+      <h2 class="section-title">艺术，<br>超越 <em>画布。</em></h2>
       <p class="section-body" style="margin-inline:auto; text-align:center;">
-        Every piece hides a tiny NFC chip. One tap with your phone — no app needed — and your artwork plays its own exclusive song. You can even customize it to a song that's entirely yours. The art you see and the music you hear become one.
+        每件作品内嵌一枚微型 NFC 芯片，轻触即可唤醒专属音乐。无需 App，无需配对，只是一次触碰——就像魔法。
       </p>
     </div>
 
@@ -1414,21 +1415,21 @@
       <div class="how-step reveal">
         <div class="how-step-num">01</div>
         <div class="how-step-dot"></div>
-        <h3>Choose Your Art</h3>
+        <h3>手机靠近作品</h3>
       </div>
       <div class="how-step reveal reveal-delay-1">
         <div class="how-step-num">02</div>
         <div class="how-step-dot"></div>
-        <h3>Tap Your Phone</h3>
+        <h3>即时感应</h3>
       </div>
       <div class="how-step reveal reveal-delay-2">
         <div class="how-step-num">03</div>
         <div class="how-step-dot"></div>
-        <h3>Hear the Story</h3>
+        <h3>音乐响起</h3>
       </div>
     </div>
 
-    <h3 class="gallery-title reveal">Products &amp; Collections</h3>
+    <h3 class="gallery-title reveal">作品系列</h3>
     <div class="product-grid">
       <div class="product-card reveal" id="card-painting">
         <div class="product-img" style="padding:0;">
@@ -1436,8 +1437,8 @@
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
-          <h4>Original Painting</h4>
-          <p>Mixed media digital art · NFC embedded</p>
+          <h4>原创画作</h4>
+          <p>丙烯画布 · 内嵌 NFC</p>
         </div>
       </div>
       <div class="product-card reveal reveal-delay-1" id="card-keychain">
@@ -1446,8 +1447,8 @@
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
-          <h4>Art Keychain</h4>
-          <p>Resin craft · NFC embedded</p>
+          <h4>艺术钥匙扣</h4>
+          <p>树脂工艺 · 内嵌 NFC</p>
         </div>
       </div>
       <div class="product-card reveal reveal-delay-2" id="card-diffuser">
@@ -1456,8 +1457,8 @@
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
-          <h4>Fragrance Diffuser</h4>
-          <p>Aromatherapy · NFC embedded</p>
+          <h4>香薰摆件</h4>
+          <p>香薰工艺 · 内嵌 NFC</p>
         </div>
       </div>
       <div class="product-card reveal reveal-delay-3" id="card-giftset">
@@ -1466,8 +1467,8 @@
           <span class="nfc-badge">NFC</span>
         </div>
         <div class="product-info">
-          <h4>Silk Scarf Gift Set</h4>
-          <p>Curated collections · NFC embedded</p>
+          <h4>真丝围巾礼盒</h4>
+          <p>精选礼盒 · 内嵌 NFC</p>
         </div>
       </div>
     </div>
@@ -1477,11 +1478,11 @@
 <section id="series">
   <!-- Header -->
   <div class="series-header reveal">
-    <p class="section-label">Original Series</p>
-    <h2 class="section-title">The World Opens<br><em style="color:var(--gold);">for Her</em></h2>
-    <blockquote class="manifesto-quote">"You can go anywhere, become anyone — unbounded."</blockquote>
-    <p class="series-intro">A collection of 13 works dedicated to women who refuse to be defined.</p>
-    <a href="#collab" class="btn btn-outline">Commission a Piece</a>
+    <p class="section-label">限定系列</p>
+    <h2 class="section-title">世界，为她<br><em style="color:var(--gold);">敞开。</em></h2>
+    <blockquote class="manifesto-quote">"你可以去任何地方，成为任何人——无拘无束。"</blockquote>
+    <p class="series-intro">一套 13 幅的系列作品，献给每一位拒绝被定义的女性。</p>
+    <a href="#collab" class="btn btn-outline">委托定制一幅</a>
   </div>
 
   <!-- Full-width gallery -->
@@ -1492,79 +1493,79 @@
       <div class="series-card">
         <img class="series-card-bg" src="images/巴黎.jpg?v=3" alt="Paris" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.01 / 13</span>
-        <div class="series-card-info"><strong>No.01 — Paris</strong><span>You deserve a fresh start.</span></div>
+        <div class="series-card-info"><strong>No.01 — 巴黎</strong><span>你值得一个全新的开始。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/伦敦.jpg?v=3" alt="London" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.02 / 13</span>
-        <div class="series-card-info"><strong>No.02 — London</strong><span>You belong just as you are.</span></div>
+        <div class="series-card-info"><strong>No.02 — 伦敦</strong><span>你本来的样子，就已足够。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/柏林.jpg?v=3" alt="Berlin" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.03 / 13</span>
-        <div class="series-card-info"><strong>No.03 — Berlin</strong><span>Don't burn yourself to keep others warm.</span></div>
+        <div class="series-card-info"><strong>No.03 — 柏林</strong><span>不要燃烧自己，只为温暖他人。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/圣托里尼.jpg?v=3" alt="Santorini" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.04 / 13</span>
-        <div class="series-card-info"><strong>No.04 — Santorini</strong><span>Beauty isn't about having a pretty face. It's about having a pretty soul.</span></div>
+        <div class="series-card-info"><strong>No.04 — 圣托里尼</strong><span>美，从不在一张漂亮的脸，而在一颗漂亮的灵魂。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/上海.jpg?v=3" alt="Shanghai" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.05 / 13</span>
-        <div class="series-card-info"><strong>No.05 — Shanghai</strong><span>You don't need permission to shine.</span></div>
+        <div class="series-card-info"><strong>No.05 — 上海</strong><span>你的光芒，不需要任何人的许可。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/北京.jpg?v=3" alt="Beijing" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.06 / 13</span>
-        <div class="series-card-info"><strong>No.06 — Beijing</strong><span>Your energy is sacred. Protect it.</span></div>
+        <div class="series-card-info"><strong>No.06 — 北京</strong><span>你的能量弥足珍贵。请好好守护它。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/东京.jpg?v=3" alt="Tokyo" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.07 / 13</span>
-        <div class="series-card-info"><strong>No.07 — Tokyo</strong><span>Progress, not perfection.</span></div>
+        <div class="series-card-info"><strong>No.07 — 东京</strong><span>追求成长，而非完美。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/纽约.jpg?v=3" alt="New York" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.08 / 13</span>
-        <div class="series-card-info"><strong>No.08 — New York</strong><span>Your presence is the present.</span></div>
+        <div class="series-card-info"><strong>No.08 — 纽约</strong><span>你的存在，本身就是礼物。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/芝加哥.jpg?v=3" alt="Chicago" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.09 / 13</span>
-        <div class="series-card-info"><strong>No.09 — Chicago</strong><span>You are not who you were yesterday. That is a beautiful thing.</span></div>
+        <div class="series-card-info"><strong>No.09 — 芝加哥</strong><span>你已不再是昨天的自己。这，是一件美好的事。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/夏威夷.jpg?v=3" alt="Hawaii" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.10 / 13</span>
-        <div class="series-card-info"><strong>No.10 — Hawaii</strong><span>Miracles happen every day. You're one of them.</span></div>
+        <div class="series-card-info"><strong>No.10 — 夏威夷</strong><span>奇迹每天都在发生。你，就是其中之一。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/里约热内卢.jpg?v=3" alt="Rio de Janeiro" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.11 / 13</span>
-        <div class="series-card-info"><strong>No.11 — Rio de Janeiro</strong><span>You're your own soulmate first.</span></div>
+        <div class="series-card-info"><strong>No.11 — 里约热内卢</strong><span>首先，成为自己的灵魂伴侣。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/旧金山.jpg?v=3" alt="San Francisco" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.12 / 13</span>
-        <div class="series-card-info"><strong>No.12 — San Francisco</strong><span>Your vibe attracts your tribe.</span></div>
+        <div class="series-card-info"><strong>No.12 — 旧金山</strong><span>你的气场，吸引同频的人。</span></div>
       </div>
 
       <div class="series-card">
         <img class="series-card-bg" src="images/洛杉矶.jpg?v=3" alt="Los Angeles" loading="lazy" style="object-fit:cover;" />
         <span class="series-card-num">No.13 / 13</span>
-        <div class="series-card-info"><strong>No.13 — Los Angeles</strong><span>Dancing through life like it's a movie scene.</span></div>
+        <div class="series-card-info"><strong>No.13 — 洛杉矶</strong><span>把生活过成一部电影，翩翩起舞。</span></div>
       </div>
 
     </div><!-- /series-track -->
@@ -1579,38 +1580,38 @@
 <section id="collab">
   <div class="container collab-inner">
     <div class="reveal">
-      <p class="section-label">Let's Create Together</p>
-      <h2 class="section-title">Tech Art Collaborations &amp;<br><em>Custom Commissions</em></h2>
+      <p class="section-label">携手创作</p>
+      <h2 class="section-title">科技艺术合作<br><em>与定制委托。</em></h2>
       <p class="section-body" style="margin-bottom:2rem;">
-        I work with tech companies, brands, and forward-thinking teams who want to give their people something they'll never forget: art that speaks the language of technology — where creativity and innovation become one.
+        我与科技公司、品牌方及富有远见的团队合作，为他们的员工和客户创作难以忘怀的礼物——让科技与创意在一件作品中合而为一。
       </p>
       <div class="collab-cards">
         <div class="collab-card">
           <div class="collab-icon">🏢</div>
           <div>
-            <h3>Corporate Gifting</h3>
-            <p>Meaningful, tech-forward gifts for clients and teams — custom artwork that maps your company's growth story through art, each piece embedded with a personalized soundtrack.</p>
+            <h3>企业定制礼品</h3>
+            <p>为客户与团队定制有温度、有科技感的礼品——用艺术记录企业成长的轨迹，每件作品内嵌一段专属配乐。</p>
           </div>
         </div>
         <div class="collab-card">
           <div class="collab-icon">🤝</div>
           <div>
-            <h3>Brand Partnerships</h3>
-            <p>Co-created NFC art experiences for brands who want to connect with their audience in a way that's never been done before.</p>
+            <h3>品牌合作</h3>
+            <p>与品牌共创 NFC 艺术体验，以从未有过的方式连接你的受众。</p>
           </div>
         </div>
         <div class="collab-card">
           <div class="collab-icon">🖼</div>
           <div>
-            <h3>Custom Commissions</h3>
-            <p>Original artwork created for you — bold, expressive pieces that reflect your inner world, with a song you choose embedded forever inside.</p>
+            <h3>定制委托</h3>
+            <p>为你量身创作——大胆、充满表现力，映照你内心世界的原创作品，永久封存你选择的那首歌。</p>
           </div>
         </div>
         <div class="collab-card">
           <div class="collab-icon">🎪</div>
           <div>
-            <h3>Events &amp; Pop-Ups</h3>
-            <p>Live NFC art demonstrations, gallery showings, and interactive installations that bring a high-tech soul to your event.</p>
+            <h3>活动与快闪</h3>
+            <p>现场 NFC 艺术演示、画廊展览与互动装置，为你的活动注入高科技灵魂。</p>
           </div>
         </div>
       </div>
@@ -1618,34 +1619,34 @@
 
     <div class="reveal reveal-delay-1">
       <div class="contact-form">
-        <h3>Start a Conversation</h3>
-        <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:0.5rem;">Tell me about your vision and I'll get back to you within 72 hours.</p>
+        <h3>开启对话</h3>
+        <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:0.5rem;">告诉我你的想法，我将在 72 小时内回复你。</p>
         <form id="contactForm" action="https://formspree.io/f/mojpqpdr" method="POST">
         <div class="form-group">
-          <label>Your Name</label>
+          <label>你的姓名</label>
           <input type="text" name="name" placeholder="Jane Smith" required />
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label>电子邮箱</label>
           <input type="email" name="email" placeholder="jane@brand.com" required />
         </div>
         <div class="form-group">
-          <label>I'm interested in...</label>
+          <label>我感兴趣的是……</label>
           <select name="interest">
-            <option value="">Select a collaboration type</option>
-            <option>Brand Partnership</option>
-            <option>Custom Commission</option>
-            <option>Event / Pop-Up</option>
-            <option>Corporate Gifting</option>
-            <option>Something Else</option>
+            <option value="">请选择合作类型</option>
+            <option>品牌合作</option>
+            <option>定制委托</option>
+            <option>活动与快闪</option>
+            <option>企业定制礼品</option>
+            <option>其他</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Message</label>
-          <textarea name="message" placeholder="Tell me about your project, brand, or idea..." required></textarea>
+          <label>留言</label>
+          <textarea name="message" placeholder="告诉我你的项目、品牌或想法……" required></textarea>
         </div>
         <button id="contactBtn" class="btn btn-gold" style="width:100%; justify-content:center;" type="submit">
-          Send Message →
+          发送消息 →
         </button>
         </form>
       </div>
@@ -1658,10 +1659,10 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <h3><span>Jenny</span>DIYCorner</h3>
-        <p>Where sound meets soul. Born in the Bay Area, crafted for the world. I create NFC-embedded tech art for collectors and brands who seek the intersection of innovation and soul.</p>
+        <p>声音与灵魂相遇的地方。诞生于湾区，为世界而创作。我为收藏家和品牌创作 NFC 科技艺术，探索创新与灵魂的交汇。</p>
         <form id="subscribeForm" class="subscribe-form" action="https://formspree.io/f/xeepqpgv" method="POST">
-          <input type="email" name="email" placeholder="Your email address" required />
-          <button id="subscribeBtn" type="submit">Subscribe</button>
+          <input type="email" name="email" placeholder="输入你的邮箱" required />
+          <button id="subscribeBtn" type="submit">订阅</button>
         </form>
         <div class="social-links" style="margin-top:1.25rem;">
           <a class="social-link" href="#" aria-label="Instagram">🎨</a>
@@ -1672,17 +1673,17 @@
       </div>
 
       <div class="footer-nav">
-        <h4>Explore</h4>
+        <h4>探索</h4>
         <ul>
-          <li><a href="#about">My Story</a></li>
-          <li><a href="#nfc">NFC Art</a></li>
-          <li><a href="#series">The World Opens for Her</a></li>
-          <li><a href="#collab">Collaborate</a></li>
+          <li><a href="#about">我的故事</a></li>
+          <li><a href="#nfc">NFC 艺术</a></li>
+          <li><a href="#series">为她，世界敞开</a></li>
+          <li><a href="#collab">合作</a></li>
         </ul>
       </div>
 
       <div class="footer-nav">
-        <h4>Connect</h4>
+        <h4>联系我</h4>
         <ul>
           <li><a href="https://www.instagram.com/jennydiycorner/">Instagram</a></li>
           <li><a href="mailto:jennydiycorner@gmail.com">jennydiycorner@gmail.com</a></li>
@@ -1691,8 +1692,8 @@
     </div>
 
     <div class="footer-bottom">
-      <span>© 2025 Jenny DIY Corner · Bay Area, CA</span>
-      <span style="color:rgba(255,255,255,0.35);">Art you can hear ✦</span>
+      <span>© 2025 Jenny DIY Corner · 湾区，加利福尼亚</span>
+      <span style="color:rgba(255,255,255,0.35);">艺术，有声音 ✦</span>
     </div>
   </div>
 </footer>
@@ -1766,7 +1767,7 @@
   // 核心魔法：用 fetch 绕过 Safari 的网络层，直接把音频下载到内存里
   async function loadAudioAsBlob() {
     try {
-      songText.textContent = 'preparing...';
+      songText.textContent = '准备中...';
       // 用普通下载方式获取 mp3，完美避开 Safari 的分段请求 bug
       const response = await fetch('https://jennyhaus.com/audio/nfc-song.mp3?v=2');
       const blob = await response.blob();
@@ -1775,10 +1776,10 @@
       nfcAudio.src = blobUrl;
       nfcAudio.load();
       audioReady = true;
-      songText.textContent = 'tap to play ✦';
+      songText.textContent = '点击播放 ✦';
     } catch (err) {
       console.error("Fetch audio failed:", err);
-      songText.textContent = 'network err ✦';
+      songText.textContent = '网络错误 ✦';
     }
   }
 
@@ -1805,15 +1806,15 @@
       musicIcon.textContent = '♪';
       songProgress.classList.remove('playing');
       songProgress.style.width = '0%';
-      songText.textContent = 'tap to play ✦';
+      songText.textContent = '点击播放 ✦';
     } else {
       // 如果网速慢，音频还没下载完，提示用户
       if (!audioReady) {
-         songText.textContent = 'still downloading...';
+         songText.textContent = '加载中...';
          return;
       }
       
-      songText.textContent = 'loading...';
+      songText.textContent = '加载中...';
       var playPromise = nfcAudio.play();
       
       if (playPromise !== undefined) {
@@ -1823,7 +1824,7 @@
           songProgress.classList.remove('playing');
           void songProgress.offsetWidth;
           songProgress.classList.add('playing');
-          songText.textContent = 'playing your song...';
+          songText.textContent = '正在播放...';
           setTimeout(function() {
             musicIcon.classList.remove('idle', 'tapped');
             musicIcon.classList.add('playing');
@@ -1897,7 +1898,7 @@
     if (!form || !btn) return;
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      btn.textContent = 'Sending...';
+      btn.textContent = '发送中...';
       btn.disabled = true;
       fetch(form.action, {
         method: 'POST',
@@ -1914,7 +1915,7 @@
             btn.disabled = false;
           }, 3000);
         } else {
-          btn.textContent = 'Error — please try again';
+          btn.textContent = '出错了，请重试';
           btn.style.background = '#c0392b';
           setTimeout(function() {
             btn.textContent = resetText;
@@ -1934,8 +1935,8 @@
     });
   }
 
-  setupFormSubmit('contactForm',   'contactBtn',   'Message sent! ✓',  'Send Message →');
-  setupFormSubmit('subscribeForm', 'subscribeBtn', 'Subscribed! ✨',    'Subscribe');
+  setupFormSubmit('contactForm',   'contactBtn',   '消息已发送！✓',  '发送消息 →');
+  setupFormSubmit('subscribeForm', 'subscribeBtn', '订阅成功！✨',    '订阅');
 </script>
 
 
@@ -1987,7 +1988,7 @@
             </rect>
           </g>
         </svg>
-        <p id="modal-hint" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the painting</p>
+        <p id="modal-hint" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">将手机拖向画作</p>
       </div>
     </div>
     <!-- Player: full-width at bottom -->
@@ -2030,7 +2031,7 @@
             <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
           </g>
         </svg>
-        <p id="modal-hint-keychain" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the keychain</p>
+        <p id="modal-hint-keychain" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">将手机拖向钥匙扣</p>
       </div>
     </div>
     <div id="modal-player-keychain" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
@@ -2069,7 +2070,7 @@
             <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
           </g>
         </svg>
-        <p id="modal-hint-diffuser" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the diffuser</p>
+        <p id="modal-hint-diffuser" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">将手机拖向香薰</p>
       </div>
     </div>
     <div id="modal-player-diffuser" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
@@ -2108,7 +2109,7 @@
             <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
           </g>
         </svg>
-        <p id="modal-hint-giftset" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone to the NFC card (top right)</p>
+        <p id="modal-hint-giftset" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">将手机拖向 NFC 卡片（右上角）</p>
       </div>
     </div>
     <div id="modal-player-giftset" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
@@ -2256,7 +2257,7 @@
       var bars = document.getElementById('iphone-playing');
       if (note) note.setAttribute('display', 'none');
       if (bars) bars.setAttribute('display', 'block');
-      if (!modalReady) { modalHint.textContent = '✦ Still loading...'; return; }
+      if (!modalReady) { modalHint.textContent = '✦ 加载中...'; return; }
       if (!modalPlaying) doPlayAudio();
     }, 600);
   }
@@ -2370,7 +2371,7 @@
       if (modalAudio.ended) {
         clearInterval(progressTimer);
         modalPlaying = false;
-        modalPauseBtn.textContent = '▶ Play again';
+        modalPauseBtn.textContent = '▶ 再播一次';
       }
     }, 500);
   }
@@ -2379,7 +2380,7 @@
     if (modalPlaying) {
       modalAudio.pause();
       modalPlaying = false;
-      modalPauseBtn.textContent = '▶ Play';
+      modalPauseBtn.textContent = '▶ 播放';
       clearInterval(progressTimer);
     } else {
       modalAudio.play();
@@ -2481,7 +2482,7 @@
         if (audio.ended) {
           clearInterval(progressTimer);
           modalPlaying = false;
-          pauseBtn.textContent = '▶ Play again';
+          pauseBtn.textContent = '▶ 再播一次';
         }
       }, 500);
     }
@@ -2514,7 +2515,7 @@
         var bars = document.getElementById('iphone-playing-' + S);
         if (note) note.setAttribute('display', 'none');
         if (bars) bars.setAttribute('display', 'block');
-        if (!modalReady) { hint.textContent = '✦ Still loading...'; return; }
+        if (!modalReady) { hint.textContent = '✦ 加载中...'; return; }
         if (!modalPlaying) doPlayAudio();
       }, 600);
     }
@@ -2668,7 +2669,7 @@
     window['toggleModalAudio_' + S] = function() {
       if (modalPlaying) {
         audio.pause(); modalPlaying = false;
-        pauseBtn.textContent = '▶ Play';
+        pauseBtn.textContent = '▶ 播放';
         clearInterval(progressTimer);
       } else {
         audio.play(); modalPlaying = true;

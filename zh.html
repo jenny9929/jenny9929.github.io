@@ -1251,6 +1251,149 @@
       cursor: pointer;
       color: var(--text);
     }
+
+    /* ─── A Song for Two (磁吸钥匙扣) ─── */
+    #pairs {
+      padding-block: 7rem 5rem;
+      background: var(--cream);
+    }
+
+    .pairs-header {
+      width: min(680px, 88%);
+      margin-inline: auto;
+      text-align: center;
+      margin-bottom: 3.6rem;
+    }
+
+    .pairs-lede {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      letter-spacing: 0.03em;
+      max-width: 46ch;
+      margin: 0 auto 2rem;
+    }
+
+    .pairs-groups {
+      width: min(1180px, 90%);
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3.2rem;
+    }
+
+    .pairs-group { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .pairs-group-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.24);
+    }
+    .pairs-group-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.55rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .pairs-group-note {
+      margin-left: auto;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .pairs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.7rem;
+    }
+
+    .pair-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      outline: none;
+    }
+
+    .pair-frame {
+      position: relative;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 11px;
+      box-shadow: 0 6px 22px rgba(58, 53, 48, 0.09);
+      transition: box-shadow 0.42s ease, transform 0.42s ease;
+    }
+    .pair-card:hover .pair-frame,
+    .pair-card:focus-visible .pair-frame,
+    .pair-card.snapped .pair-frame {
+      box-shadow: 0 16px 42px rgba(58, 53, 48, 0.17);
+      transform: translateY(-4px);
+    }
+    .pair-card:focus-visible .pair-frame {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* 照片从正中间劈成两半，金色爱心正好被分开；吸合时无缝复原 */
+    .pair-halves { display: flex; aspect-ratio: 1 / 1; }
+
+    .pair-half {
+      position: relative;
+      flex: 0 0 50%;
+      overflow: hidden;
+      transition: transform 0.44s cubic-bezier(0.34, 1.42, 0.64, 1);
+    }
+    .pair-half img {
+      position: absolute;
+      top: 0;
+      width: 200%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pair-half.l     { border-radius: 12px 0 0 12px; transform: translateX(-13px); }
+    .pair-half.r     { border-radius: 0 12px 12px 0; transform: translateX(13px); }
+    .pair-half.l img { left: 0; }
+    .pair-half.r img { right: 0; }
+
+    .pair-card:hover .pair-half,
+    .pair-card:focus-visible .pair-half,
+    .pair-card.snapped .pair-half { transform: translateX(0); }
+
+    .pair-no {
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pair-meaning {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.08rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+    .pair-meaning .lead-in { color: var(--text-light); }
+
+    @media (max-width: 900px) {
+      .pairs-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      #pairs { padding-block: 4.5rem 3.5rem; }
+      .pairs-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+      .pair-half.l { transform: translateX(-9px); }
+      .pair-half.r { transform: translateX(9px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pair-half, .pair-frame { transition: none; }
+      .pair-half.l, .pair-half.r { transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -1262,7 +1405,8 @@
   <button class="mobile-nav-close" id="mobileNavClose">✕</button>
   <a href="#about" onclick="closeMobileNav()">故事</a>
   <a href="#nfc" onclick="closeMobileNav()">NFC 艺术</a>
-  <a href="#series" onclick="closeMobileNav()">系列</a>
+  <a href="#series" onclick="closeMobileNav()">为她</a>
+  <a href="#pairs" onclick="closeMobileNav()">为两个人</a>
   <a href="#collab" onclick="closeMobileNav()">合作</a>
   <a href="index.html" class="lang-switch" onclick="closeMobileNav()">EN</a>
 </div>
@@ -1273,7 +1417,8 @@
     <ul class="nav-links">
       <li><a href="#about">故事</a></li>
       <li><a href="#nfc">NFC 艺术</a></li>
-      <li><a href="#series">系列</a></li>
+      <li><a href="#series">为她</a></li>
+      <li><a href="#pairs">为两个人</a></li>
       <li><a href="#collab">合作</a></li>
       <li><a href="index.html" class="lang-switch">EN</a></li>
     </ul>
@@ -1577,6 +1722,172 @@
   </div><!-- /series-gallery-wrap -->
 </section>
 
+<section id="pairs">
+  <div class="pairs-header reveal">
+    <p class="section-label">成对系列</p>
+    <h2 class="section-title">一首歌，<br><em style="color:var(--gold);">两个人</em></h2>
+    <blockquote class="manifesto-quote">"一心两半 —— 和一首只属于你们的歌。"</blockquote>
+    <p class="pairs-lede">磁吸钥匙扣成对扣合成一颗金色的心。一人一半，一人一首歌 —— 点你的，听见对方的。</p>
+    <a href="#collab" class="btn btn-outline">定制你们那一对</a>
+  </div>
+
+  <div class="pairs-groups">
+      <div class="pairs-group reveal">
+        <div class="pairs-group-head">
+          <h3 class="pairs-group-name">Purrfect Match</h3>
+          <span class="pairs-group-note">三款精选</span>
+        </div>
+        <div class="pairs-grid">
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.01 — 爱，是我们各自的小角落。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/猫1.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/猫1.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.01</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>我们各自的小角落。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.02 — 爱，是恰到好处的调和。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/猫2.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/猫2.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.02</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>恰到好处的调和。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.03 — 爱，是为对方做一点甜的。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/猫3.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/猫3.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.03</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>为对方做一点甜的。</p>
+        </article>
+        </div>
+      </div>
+      <div class="pairs-group reveal">
+        <div class="pairs-group-head">
+          <h3 class="pairs-group-name">Puppy Love</h3>
+          <span class="pairs-group-note">三款精选</span>
+        </div>
+        <div class="pairs-grid">
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.04 — 爱，是并肩作战。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/狗1.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/狗1.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.04</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>并肩作战。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.05 — 爱，是一起做的好梦。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/狗2.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/狗2.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.05</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>一起做的好梦。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.06 — 爱，是零食和笑容。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/狗3.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/狗3.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.06</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>零食和笑容。</p>
+        </article>
+        </div>
+      </div>
+      <div class="pairs-group reveal">
+        <div class="pairs-group-head">
+          <h3 class="pairs-group-name">Lovebirds</h3>
+          <span class="pairs-group-note">三款精选</span>
+        </div>
+        <div class="pairs-grid">
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.07 — 爱，是共享同一首歌。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/鸟1.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/鸟1.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.07</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>共享同一首歌。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.08 — 爱，是为对方的日子添上颜色。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/鸟2.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/鸟2.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.08</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>为对方的日子添上颜色。</p>
+        </article>
+        <article class="pair-card" tabindex="0" role="button" aria-label="No.09 — 爱，是一起迷路。 点击可让两半吸合">
+          <div class="pair-frame">
+            <div class="pair-halves">
+              <span class="pair-half l"><img src="images/鸟3.jpg?v=1" alt="" loading="lazy" /></span>
+              <span class="pair-half r"><img src="images/鸟3.jpg?v=1" alt="" loading="lazy" /></span>
+            </div>
+          </div>
+          <p class="pair-no">No.09</p>
+          <p class="pair-meaning"><span class="lead-in">爱，是</span>一起迷路。</p>
+        </article>
+        </div>
+      </div>
+  </div>
+</section>
+
+<script>
+  /* A Song for Two —— 点一下让两半吸合；桌面端 hover 即可 */
+  (function () {
+    var cards = document.querySelectorAll('.pair-card');
+    if (!cards.length) return;
+
+    cards.forEach(function (c) {
+      c.addEventListener('click', function () { c.classList.toggle('snapped'); });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          c.classList.toggle('snapped');
+        }
+      });
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    /* 每组滚进视野时，第一张自动演示一次吸合，告诉用户这里可以互动 */
+    var taught = new WeakSet();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting || taught.has(en.target)) return;
+        taught.add(en.target);
+        var first = en.target.querySelector('.pair-card');
+        if (!first) return;
+        setTimeout(function () {
+          first.classList.add('snapped');
+          setTimeout(function () { first.classList.remove('snapped'); }, 1400);
+        }, 450);
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.pairs-group').forEach(function (g) { io.observe(g); });
+  })();
+</script>
+
+
 <section id="collab">
   <div class="container collab-inner">
     <div class="reveal">
@@ -1678,6 +1989,7 @@
           <li><a href="#about">我的故事</a></li>
           <li><a href="#nfc">NFC 艺术</a></li>
           <li><a href="#series">为她，世界敞开</a></li>
+          <li><a href="#pairs">一首歌，两个人</a></li>
           <li><a href="#collab">合作</a></li>
         </ul>
       </div>

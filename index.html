@@ -1450,6 +1450,110 @@
     @media (prefers-reduced-motion: reduce) {
       .gallery-hint-dot { animation: none; }
     }
+
+    /* ─── Art You Can Hold (线下) ─── */
+    #inperson {
+      padding-block: 7rem;
+      background: var(--white);
+    }
+
+    .inperson-header {
+      width: min(680px, 88%);
+      margin-inline: auto;
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .inperson-body {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+      gap: 3.5rem;
+      align-items: center;
+      width: min(1060px, 90%);
+      margin-inline: auto;
+    }
+
+    .inperson-photo img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+      box-shadow: 0 14px 40px rgba(58, 53, 48, 0.14);
+    }
+
+    .inperson-lists {
+      display: flex;
+      flex-direction: column;
+      gap: 2.6rem;
+    }
+
+    .inperson-block h3 {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 0.7rem;
+      margin-bottom: 1.1rem;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.28);
+    }
+
+    /* 寄售店铺 —— 整块可点，跳 Google Maps */
+    .stockist {
+      display: block;
+      text-decoration: none;
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 14px;
+      padding: 1.15rem 1.3rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+    .stockist:hover, .stockist:focus-visible {
+      border-color: var(--gold);
+      box-shadow: 0 10px 28px rgba(58, 53, 48, 0.1);
+      transform: translateY(-2px);
+    }
+    .stockist-name {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .stockist-addr {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+    .stockist-go {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    /* 集市 —— 只列名字，本身就是背书 */
+    .market-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .market-list li {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      border-radius: 50px;
+      padding: 0.42rem 1rem;
+    }
+
+    @media (max-width: 820px) {
+      #inperson { padding-block: 4.5rem; }
+      .inperson-body { grid-template-columns: 1fr; gap: 2.4rem; }
+    }
   </style>
 </head>
 <body>
@@ -1463,6 +1567,7 @@
   <a href="#nfc" onclick="closeMobileNav()">NFC Art</a>
   <a href="#series" onclick="closeMobileNav()">For Her</a>
   <a href="#pairs" onclick="closeMobileNav()">For Two</a>
+  <a href="#inperson" onclick="closeMobileNav()">In Person</a>
   <a href="#collab" onclick="closeMobileNav()">Collaborate</a>
   <!-- 中文版暂未上线。zh.html 保留在本地；想恢复就去掉这行注释，并把 zh.html 从 .gitignore 里移出去。
   <a href="zh.html" class="lang-switch" onclick="closeMobileNav()">中文</a>
@@ -1477,6 +1582,7 @@
       <li><a href="#nfc">NFC Art</a></li>
       <li><a href="#series">For Her</a></li>
       <li><a href="#pairs">For Two</a></li>
+      <li><a href="#inperson">In Person</a></li>
       <li><a href="#collab">Collaborate</a></li>
       <!-- 中文版暂未上线，恢复方式同上
       <li><a href="zh.html" class="lang-switch">中文</a></li>
@@ -1690,7 +1796,7 @@
 <section id="series">
   <!-- Header -->
   <div class="series-header reveal">
-    <p class="section-label">Original Series</p>
+    <p class="section-label">Original Series · One</p>
     <h2 class="section-title">The World Opens<br><em style="color:var(--gold);">for Her</em></h2>
     <blockquote class="manifesto-quote">"You can go anywhere, become anyone — unbounded."</blockquote>
     <p class="series-intro">A collection of 13 works dedicated to women who refuse to be defined.</p>
@@ -1791,7 +1897,7 @@
 
 <section id="pairs">
   <div class="pairs-header reveal">
-    <p class="section-label">Matching Series</p>
+    <p class="section-label">Original Series · Two</p>
     <h2 class="section-title">A Song<br><em style="color:var(--gold);">for Two</em></h2>
     <blockquote class="manifesto-quote">"Two halves, one heart — and a song that belongs to no one else."</blockquote>
     <p class="pairs-lede">Magnetic pairs that click together into a single gold heart. Each half holds its own song — tap yours, hear theirs.</p>
@@ -1955,6 +2061,36 @@
 </script>
 
 
+<section id="inperson">
+  <div class="inperson-header reveal">
+    <p class="section-label">In Person</p>
+    <h2 class="section-title">Art You Can<br><em style="color:var(--gold);">Hold</em></h2>
+    <blockquote class="manifesto-quote">"Tap it at home. Hold it in your hands."</blockquote>
+  </div>
+
+  <div class="inperson-body">
+    <div class="inperson-photo reveal">
+      <img src="images/booth.jpg?v=1" alt="Jenny DIY Corner market booth — tap-to-play music gifts" loading="lazy" />
+    </div>
+
+    <div class="inperson-lists reveal reveal-delay-1">
+      <div class="inperson-block">
+        <h3>Stocked At</h3>
+        <a class="stockist" href="https://www.google.com/maps/place/Celery+Retail/@37.5367775,-122.3024939,17z/data=!3m2!4b1!5s0x808f9efe12029eb3:0xb6fcfd9d1ef60a9c!4m6!3m5!1s0x808f9f508ed0fb3d:0x9bf782da3ab156a3!8m2!3d37.5367733!4d-122.299919!16s%2Fg%2F11wvm4tl73" target="_blank" rel="noopener noreferrer">
+          <span class="stockist-name">Celery Retail</span>
+          <span class="stockist-addr">Hillsdale Shopping Center · Unit #134 · San Mateo, CA</span>
+          <span class="stockist-go">View on map &#8599;</span>
+        </a>
+      </div>
+
+      <div class="inperson-block">
+        <h3>Find Me At</h3>
+        <ul class="market-list"><li>MAUM Market</li><li>Makers Market</li><li>The Box SF</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="collab">
   <div class="container collab-inner">
     <div class="reveal">
@@ -2057,6 +2193,7 @@
           <li><a href="#nfc">NFC Art</a></li>
           <li><a href="#series">The World Opens for Her</a></li>
           <li><a href="#pairs">A Song for Two</a></li>
+          <li><a href="#inperson">In Person</a></li>
           <li><a href="#collab">Collaborate</a></li>
         </ul>
       </div>

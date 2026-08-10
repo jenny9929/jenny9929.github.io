@@ -1393,6 +1393,63 @@
       .pair-half, .pair-frame { transition: none; }
       .pair-half.l, .pair-half.r { transform: none; }
     }
+
+    /* ─── 提示客人点开产品才能听歌 ─── */
+    .gallery-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .gallery-head .gallery-title { margin-bottom: 0; }
+
+    .gallery-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+    .gallery-hint-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: cue-pulse 2s ease-in-out infinite;
+    }
+    @keyframes cue-pulse {
+      0%, 100% { opacity: 1;   transform: scale(1); }
+      50%      { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    /* 每张产品卡上常驻一个提示，手机上没有 hover 也看得到 */
+    .product-img .play-cue {
+      position: absolute;
+      left: 10px; bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(28, 22, 18, 0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(201, 169, 110, 0.45);
+      color: var(--gold-light);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      padding: 0.28rem 0.6rem;
+      border-radius: 50px;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .product-card:hover .play-cue {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #2A2520;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-hint-dot { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -1577,12 +1634,16 @@
       </div>
     </div>
 
-    <h3 class="gallery-title reveal">Products &amp; Collections</h3>
+    <div class="gallery-head reveal">
+      <h3 class="gallery-title">Products &amp; Collections</h3>
+      <p class="gallery-hint"><span class="gallery-hint-dot"></span>Tap any piece to hear its song</p>
+    </div>
     <div class="product-grid">
       <div class="product-card reveal" id="card-painting">
         <div class="product-img" style="padding:0;">
           <img src="images/裱画.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
+          <span class="play-cue">&#9654; Hear the song</span>
         </div>
         <div class="product-info">
           <h4>Original Painting</h4>
@@ -1593,6 +1654,7 @@
         <div class="product-img" style="padding:0;">
           <img src="images/钥匙扣.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
+          <span class="play-cue">&#9654; Hear the song</span>
         </div>
         <div class="product-info">
           <h4>Art Keychain</h4>
@@ -1603,6 +1665,7 @@
         <div class="product-img" style="padding:0;">
           <img src="images/香薰片.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
+          <span class="play-cue">&#9654; Hear the song</span>
         </div>
         <div class="product-info">
           <h4>Fragrance Diffuser</h4>
@@ -1613,6 +1676,7 @@
         <div class="product-img" style="padding:0;">
           <img src="images/礼盒.jpg?v=2" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
+          <span class="play-cue">&#9654; Hear the song</span>
         </div>
         <div class="product-info">
           <h4>Silk Scarf Gift Set</h4>
@@ -2140,7 +2204,10 @@
           void songProgress.offsetWidth;
           songProgress.classList.add('playing');
           songText.textContent = 'playing your song...';
-          setTimeout(function() {
+          // 存下 timer：这 300ms 内若被别的播放器打断，得能取消，
+          // 否则它会把已经复位的图标又改回「播放中」
+          clearTimeout(nfcAudio._iconTimer);
+          nfcAudio._iconTimer = setTimeout(function() {
             musicIcon.classList.remove('idle', 'tapped');
             musicIcon.classList.add('playing');
           }, 300);
@@ -2162,8 +2229,9 @@
 
   // 音频自然播放结束重置
   nfcAudio.addEventListener('ended', () => {
+    clearTimeout(nfcAudio._iconTimer);
     isPlaying = false;
-    musicIcon.classList.remove('playing');
+    musicIcon.classList.remove('playing', 'tapped');
     musicIcon.classList.add('idle');
     musicIcon.textContent = '♪';
     songProgress.classList.remove('playing');
@@ -3136,6 +3204,37 @@
   }
 }
 </style>
+
+
+<script>
+  /* 全局音频互斥：页面上有 5 个独立播放器（首页 1 个 + 产品弹窗 4 个），
+     以前互不知情会一起响。现在任何一个开始播放，其余的都停掉并复位各自的 UI。
+     复位走每个播放器已有的路径 —— 首页那个用 'ended' 事件，弹窗用它们自己的
+     toggle 函数（只有它能清掉进度条的 setInterval）。 */
+  (function () {
+    var STOPPERS = {
+      'nfcAudio':             function (a) { a.dispatchEvent(new Event('ended')); },
+      'modal-audio':          function () { if (window.toggleModalAudio)          window.toggleModalAudio(); },
+      'modal-audio-keychain': function () { if (window.toggleModalAudio_keychain) window.toggleModalAudio_keychain(); },
+      'modal-audio-diffuser': function () { if (window.toggleModalAudio_diffuser) window.toggleModalAudio_diffuser(); },
+      'modal-audio-giftset':  function () { if (window.toggleModalAudio_giftset)  window.toggleModalAudio_giftset(); }
+    };
+
+    var players = Object.keys(STOPPERS)
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    players.forEach(function (started) {
+      started.addEventListener('play', function () {
+        players.forEach(function (other) {
+          if (other === started || other.paused) return;
+          try { STOPPERS[other.id](other); } catch (e) { /* 复位失败也要保证声音停掉 */ }
+          if (!other.paused) other.pause();   // 兜底
+        });
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

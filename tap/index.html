@@ -63,10 +63,13 @@
     50%{transform:rotate(6deg);}
   }
   #tap-hint{
-    margin-top:10px; font-size:14px; color:var(--ink-soft);
+    margin-top:10px; color:#8A7A5F;
     background:var(--cream2); border:1px solid #E8D5B0;
-    padding:8px 16px; border-radius:999px;
+    padding:8px 18px; border-radius:999px;
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:17px;
+    letter-spacing:.5px; display:inline-flex; align-items:center; gap:9px;
   }
+  #tap-hint .hint-waves{flex:none;}
   #tap-player{margin-top:6px;width:100%;max-width:420px;text-align:center;}
   #tap-player[hidden]{display:none;}
   .now-playing{
@@ -148,7 +151,7 @@
       <text x="32" y="36" text-anchor="middle" font-size="17">♪</text>
     </svg>
   </div>
-  <div id="tap-hint">Drag me onto the art 👆</div>
+  <div id="tap-hint"><svg class="hint-waves" viewBox="0 0 36 24" width="32" height="21" aria-hidden="true"><path d="M7 3 Q 13 12 7 21" fill="none" stroke="#C9A96E" stroke-width="1.7" stroke-linecap="round"/><path d="M15 3 Q 21 12 15 21" fill="none" stroke="#C9A96E" stroke-width="1.7" stroke-linecap="round" opacity=".6"/><path d="M23 3 Q 29 12 23 21" fill="none" stroke="#C9A96E" stroke-width="1.7" stroke-linecap="round" opacity=".32"/></svg><span>Drag me onto the art</span></div>
   <div id="tap-player" hidden>
     <div class="now-playing">♪ San Francisco</div>
     <button id="tap-pause">❚❚ Pause</button>

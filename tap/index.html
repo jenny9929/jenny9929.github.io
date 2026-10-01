@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- nfc-landing v2 — line icons (Lucide/Feather) -->
+<title>JennyDIYCorner — Art You Can Hear</title>
+<meta name="description" content="JennyDIYCorner — SF gifts with a tap. Original Bay Area illustrations you can hear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF7F2; --cream2:#F5F0E8; --ink:#3A3530; --ink-soft:#9E948C;
+    --gold:#C9A96E; --gold-deep:#b8935a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--cream); color:var(--ink);
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:28px 20px 40px; overflow-x:hidden;
+  }
+  header{text-align:center;margin-bottom:18px;}
+  header h1{
+    font-family:"Cormorant Garamond",serif; font-weight:600;
+    font-size:30px; letter-spacing:2px;
+  }
+  header p{
+    font-family:"Cormorant Garamond",serif; font-style:italic;
+    color:var(--ink-soft); font-size:17px; margin-top:4px; letter-spacing:1px;
+  }
+  .art-wrap{position:relative;width:100%;max-width:420px;}
+  .art-wrap img{
+    width:100%; border-radius:18px; display:block;
+    box-shadow:0 12px 32px rgba(58,53,48,.14);
+    user-select:none; -webkit-user-select:none;
+  }
+  #ripple-layer,#notes-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:18px;}
+  @keyframes ripple{from{transform:scale(0);opacity:1;}to{transform:scale(1);opacity:0;}}
+  .note{
+    position:absolute; font-size:22px; color:var(--gold-deep);
+    animation:floatUp 2.4s ease-out forwards; pointer-events:none;
+  }
+  @keyframes floatUp{
+    from{transform:translateY(0) rotate(-8deg);opacity:0;}
+    15%{opacity:1;}
+    to{transform:translateY(-140px) rotate(10deg);opacity:0;}
+  }
+  .phone-zone{
+    position:relative; width:100%; max-width:420px;
+    display:flex; flex-direction:column; align-items:center;
+    margin-top:22px; min-height:120px;
+  }
+  #tap-phone{
+    width:64px; height:64px; cursor:grab; touch-action:none;
+    filter:drop-shadow(0 6px 12px rgba(58,53,48,.18));
+    animation:wiggle 2.2s ease-in-out infinite;
+  }
+  #tap-phone.grabbing{cursor:grabbing;animation:none;}
+  @keyframes wiggle{
+    0%,100%{transform:rotate(-6deg);}
+    50%{transform:rotate(6deg);}
+  }
+  #tap-hint{
+    margin-top:10px; font-size:14px; color:var(--ink-soft);
+    background:var(--cream2); border:1px solid #E8D5B0;
+    padding:8px 16px; border-radius:999px;
+  }
+  #tap-player{margin-top:6px;width:100%;max-width:420px;text-align:center;}
+  #tap-player[hidden]{display:none;}
+  .now-playing{
+    font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:16px; color:var(--ink-soft); margin-bottom:10px;
+  }
+  #tap-pause{
+    font-size:15px; padding:10px 26px; border-radius:999px;
+    border:1.5px solid var(--gold); background:#fff; color:var(--ink);
+    cursor:pointer; letter-spacing:.5px;
+  }
+  #tap-pause:active{transform:scale(.96);}
+  .progress{
+    height:5px; background:var(--cream2); border-radius:99px;
+    margin-top:12px; overflow:hidden;
+  }
+  #tap-progress{height:100%;width:0;background:var(--gold);border-radius:99px;}
+  nav.links{width:100%;max-width:420px;margin-top:26px;display:flex;flex-direction:column;gap:12px;}
+  nav.links a{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:15px; border-radius:14px; text-decoration:none;
+    background:#fff; color:var(--ink); font-size:16px; font-weight:600;
+    border:1.5px solid #EDE4D3; box-shadow:0 4px 14px rgba(58,53,48,.06);
+    transition:transform .12s ease;
+  }
+  nav.links a:active{transform:scale(.97);border-color:var(--gold);}
+  nav.links a .em{font-size:20px;}
+  nav.links a svg{width:22px;height:22px;color:var(--gold-deep);flex:none;}
+  /* 图标来源：Lucide (ISC) + Feather (MIT)，均为开源免费商用 */
+  footer{
+    margin-top:34px; font-size:12.5px; color:var(--ink-soft); letter-spacing:1px;
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px;
+  }
+  .brand-footer{margin-top:40px;width:100%;max-width:420px;text-align:center;}
+  .brand-footer .rule{width:54px;height:2px;background:var(--gold);margin:0 auto 22px;opacity:.75;border-radius:2px;}
+  .brand-footer .products{
+    font-family:"Cormorant Garamond",serif;font-size:16px;color:var(--ink);
+    letter-spacing:1.5px;line-height:2;margin-bottom:20px;
+  }
+  .brand-footer .new-badge{
+    display:inline-block;font-size:10px;letter-spacing:2px;font-weight:700;
+    color:#fff;background:var(--gold);border-radius:999px;
+    padding:3px 10px 3px 12px;margin-left:8px;vertical-align:3px;
+  }
+  .brand-footer .hairline{height:1px;background:#EAE0CE;margin:0 24px 20px;}
+  .brand-footer .legal{font-size:12px;color:var(--ink-soft);line-height:1.9;letter-spacing:.3px;margin-bottom:20px;}
+  .brand-footer .collab{font-size:13px;color:var(--ink-soft);line-height:1.9;letter-spacing:.3px;margin-bottom:20px;}
+  .brand-footer .collab a{color:var(--gold-deep);text-decoration:none;border-bottom:1px solid var(--gold);font-weight:600;}
+  .brand-footer .est{
+    font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:3px;
+    color:var(--ink-soft);text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JennyDIYCorner</h1>
+  <p>Art You Can Hear</p>
+</header>
+
+<div class="art-wrap" id="art-wrap">
+  <img id="tap-artwork" src="cable-car.jpg" alt="Kitty cable car — San Francisco" draggable="false">
+  <div id="ripple-layer"></div>
+  <div id="notes-layer"></div>
+</div>
+
+<div class="phone-zone">
+  <!-- 可拖拽的小手机：SVG 手绘风 -->
+  <div id="tap-phone" role="button" aria-label="Drag onto the artwork to play music" title="Drag me onto the art">
+    <svg viewBox="0 0 64 64" width="64" height="64">
+      <rect x="14" y="6" width="36" height="52" rx="9" fill="#fff" stroke="#3A3530" stroke-width="3"/>
+      <rect x="20" y="14" width="24" height="30" rx="3" fill="#F5F0E8" stroke="#C9A96E" stroke-width="2"/>
+      <circle cx="32" cy="51" r="2.6" fill="#3A3530"/>
+      <path d="M6 22 q4 -6 0 -12" stroke="#3A3530" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M58 22 q-4 -6 0 -12" stroke="#3A3530" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M2 26 q6 -9 0 -18" stroke="#3A3530" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".55"/>
+      <path d="M62 26 q-6 -9 0 -18" stroke="#3A3530" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".55"/>
+      <text x="32" y="36" text-anchor="middle" font-size="17">♪</text>
+    </svg>
+  </div>
+  <div id="tap-hint">Drag me onto the art 👆</div>
+  <div id="tap-player" hidden>
+    <div class="now-playing">♪ San Francisco — hummed by Jenny</div>
+    <button id="tap-pause">❚❚ Pause</button>
+    <div class="progress"><div id="tap-progress"></div></div>
+  </div>
+</div>
+
+<nav class="links">
+  <a href="https://jennyhaus.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> jennyhaus.com</a>
+  <a href="https://www.etsy.com/shop/JennyDIYCorner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg> Etsy Shop</a>
+  <a href="https://www.instagram.com/jennydiycorner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> @jennydiycorner</a>
+  <a href="mailto:jennydiycorner@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg> jennydiycorner@gmail.com</a>
+</nav>
+
+<div class="brand-footer">
+  <div class="rule"></div>
+  <p class="products">Stationery &nbsp;·&nbsp; Music Keychains &nbsp;·&nbsp; Fridge Magnets &nbsp;·&nbsp; Leather Goods <span class="new-badge">NEW</span></p>
+  <div class="hairline"></div>
+  <p class="legal">© 2026 JennyDIYCorner · All artwork and designs are original.<br>Please do not copy or reproduce.</p>
+  <div class="hairline"></div>
+  <p class="collab">For wholesale &amp; collaboration:<br><a href="mailto:jennydiycorner@gmail.com">jennydiycorner@gmail.com</a></p>
+  <div class="hairline"></div>
+  <p class="est">Est. 2025 · Bay Area, CA</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     音乐文件：把你的录音命名为 san-francisco.mp3，
+     放到你仓库的 /audio/ 目录下即可，无需改代码。
+     ═══════════════════════════════════════════════════════════ -->
+<audio id="tap-audio" loop playsinline preload="auto" src="/audio/san-francisco.mp3"></audio>
+
+<script>
+(function(){
+  var phone   = document.getElementById('tap-phone');
+  var art     = document.getElementById('tap-artwork');
+  var artWrap = document.getElementById('art-wrap');
+  var hint    = document.getElementById('tap-hint');
+  var player  = document.getElementById('tap-player');
+  var pauseBtn= document.getElementById('tap-pause');
+  var progress= document.getElementById('tap-progress');
+  var notesLayer = document.getElementById('notes-layer');
+  var rippleLayer= document.getElementById('ripple-layer');
+  var audio   = document.getElementById('tap-audio');
+
+  var playing = false, audioReady = false, notesTimer = null, progressTimer = null;
+  var homePos = null, dragging = false, triggered = false;
+  var startX=0, startY=0, offX=0, offY=0;
+
+  // —— iOS 音频解锁：第一次触摸时静音预播一次 ——
+  function unlockAudio(){
+    if (audioReady) return;
+    audio.muted = true;
+    var p = audio.play();
+    if (p && p.then) p.then(function(){ audio.pause(); audio.muted=false; audioReady=true; })
+                     .catch(function(){ audio.muted=false; });
+    else { audioReady = true; }
+    document.removeEventListener('touchstart', unlockAudio);
+  }
+  document.addEventListener('touchstart', unlockAudio, {passive:true});
+
+  audio.addEventListener('canplaythrough', function(){ audioReady = true; });
+  audio.addEventListener('error', function(){
+    hint.textContent = '⚠ music file not found — add /audio/san-francisco.mp3';
+  });
+
+  function spawnRipple(cx, cy){
+    var r = art.getBoundingClientRect(), w = artWrap.getBoundingClientRect();
+    var ripple = document.createElement('div');
+    var size = 220;
+    ripple.style.cssText = 'position:absolute;border-radius:50%;'
+      + 'background:rgba(201,169,110,0.35);transform:scale(0);'
+      + 'animation:ripple 0.9s ease-out forwards;pointer-events:none;'
+      + 'width:'+size+'px;height:'+size+'px;'
+      + 'left:'+(cx - w.left - size/2)+'px;top:'+(cy - w.top - size/2)+'px;';
+    rippleLayer.appendChild(ripple);
+    setTimeout(function(){ ripple.remove(); }, 950);
+  }
+
+  function spawnNotes(){
+    if (notesTimer) return;
+    var symbols = ['♪','♫','♩'];
+    notesTimer = setInterval(function(){
+      if (!playing) return;
+      var n = document.createElement('span');
+      n.className = 'note';
+      n.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      n.style.left = (8 + Math.random()*84) + '%';
+      n.style.top = '70%';
+      notesLayer.appendChild(n);
+      setTimeout(function(){ n.remove(); }, 2500);
+    }, 700);
+  }
+
+  function updateProgress(){
+    clearInterval(progressTimer);
+    progressTimer = setInterval(function(){
+      if (audio.duration) progress.style.width = (audio.currentTime/audio.duration*100)+'%';
+    }, 400);
+  }
+
+  function doPlay(){
+    player.hidden = false;
+    hint.style.display = 'none';
+    var p = audio.play();
+    if (p && p.then) p.then(function(){
+      playing = true; pauseBtn.textContent = '❚❚ Pause';
+      spawnNotes(); updateProgress();
+    }).catch(function(err){
+      hint.style.display = 'block';
+      hint.textContent = '⚠ ' + err.name + ' — tap the phone again';
+    });
+    else { playing = true; spawnNotes(); updateProgress(); }
+  }
+
+  function doPause(){
+    audio.pause(); playing = false;
+    pauseBtn.textContent = '▶ Play';
+    clearInterval(progressTimer); clearInterval(notesTimer); notesTimer = null;
+  }
+
+  pauseBtn.addEventListener('click', function(){
+    if (!audioReady && audio.readyState < 2){ hint.style.display='block'; hint.textContent='✦ Still loading…'; return; }
+    playing ? doPause() : doPlay();
+  });
+
+  // 点一下手机 = 播放/暂停（不会拖拽的人也能用）
+  var tapMoved = false;
+  phone.addEventListener('click', function(){
+    if (tapMoved) return;
+    if (!audioReady && audio.readyState < 2){ hint.style.display='block'; hint.textContent='✦ Still loading…'; return; }
+    playing ? doPause() : doPlay();
+  });
+
+  // —— 拖拽：Pointer Events 同时覆盖鼠标和触屏 ——
+  phone.addEventListener('pointerdown', function(e){
+    dragging = true; triggered = false; tapMoved = false;
+    phone.classList.add('grabbing');
+    phone.style.animation = 'none';
+    var r = phone.getBoundingClientRect();
+    homePos = {left:r.left, top:r.top, w:r.width, h:r.height};
+    startX = e.clientX; startY = e.clientY;
+    offX = e.clientX - r.left - r.width/2;
+    offY = e.clientY - r.top - r.height/2;
+    phone.style.position = 'fixed';
+    phone.style.zIndex = '9999';
+    phone.style.left = r.left+'px'; phone.style.top = r.top+'px';
+    phone.style.width = r.width+'px'; phone.style.height = r.height+'px';
+    phone.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+
+  phone.addEventListener('pointermove', function(e){
+    if (!dragging || triggered) return;
+    var cx = e.clientX, cy = e.clientY;
+    if (Math.hypot(cx-startX, cy-startY) > 8) tapMoved = true;
+    phone.style.left = (cx - offX - homePos.w/2)+'px';
+    phone.style.top  = (cy - offY - homePos.h/2)+'px';
+    var ar = art.getBoundingClientRect();
+    var dist = Math.hypot(cx-(ar.left+ar.width/2), cy-(ar.top+ar.height/2));
+    if (dist < 110){
+      triggered = true; dragging = false;
+      springBack();
+      spawnRipple(cx, cy);
+      setTimeout(function(){ if(!playing) doPlay(); }, 450);
+    }
+  });
+
+  function springBack(){
+    if (!homePos) return;
+    phone.style.transition = 'left .55s cubic-bezier(0.34,1.56,0.64,1), top .55s cubic-bezier(0.34,1.56,0.64,1)';
+    phone.style.left = homePos.left+'px';
+    phone.style.top  = homePos.top +'px';
+    setTimeout(resetPhone, 580);
+  }
+  function resetPhone(){
+    phone.style.cssText = '';
+    phone.classList.remove('grabbing');
+  }
+
+  function cancelDrag(){
+    if (!dragging) return;
+    dragging = false;
+    springBack();
+  }
+  phone.addEventListener('pointerup', cancelDrag);
+  phone.addEventListener('pointercancel', cancelDrag);
+})();
+</script>
+</body>
+</html>

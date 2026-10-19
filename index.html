@@ -318,25 +318,30 @@
 
     .nfc-scene {
       position: relative;
-      width: 340px;
-      height: 400px;
-    }
-
-    /* ── Art Print (square, polaroid) ── */
-    .art-print {
-      position: absolute;
-      bottom: 20px; left: 0;
-      width: 250px;
-      background: var(--white);
-      padding: 10px;
-      box-shadow:
-        0 8px 32px rgba(58, 53, 48, 0.14),
-        0 2px 8px rgba(58, 53, 48, 0.08);
-      transform: rotate(-3deg);
+      width: 360px;
+      max-width: 84vw;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
+      gap: 1.1rem;
+    }
+
+    /* ── Hero video card ── */
+    .art-print {
+      position: relative;
+      width: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow:
+        0 30px 70px rgba(58, 53, 48, 0.22),
+        0 4px 16px rgba(58, 53, 48, 0.10),
+        0 0 0 1px rgba(201, 169, 110, 0.45);
+      animation: hero-float 7s ease-in-out infinite;
+    }
+
+    @keyframes hero-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
     }
 
     .art-print-img {
@@ -344,6 +349,34 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       display: block;
+    }
+
+    /* floating music badge on the video */
+    .hero-video-badge {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 20px rgba(201, 169, 110, 0.55);
+      animation: badge-pulse 2.4s ease-in-out infinite;
+    }
+
+    /* caption under the video */
+    .hero-video-caption {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
     }
 
     /* NFC badge — in normal flow, sits in polaroid bottom area */
@@ -1193,7 +1226,7 @@
       .hero-sub { margin-inline: auto; }
       .hero-actions { justify-content: center; }
       .hero-visual { order: -1; }
-      .nfc-scene { width: 260px; height: 340px; }
+      .nfc-scene { width: 260px; height: auto; }
       .phone { width: 90px; height: 164px; }
 
       .about-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -1628,17 +1661,10 @@
             preload="metadata"
             aria-label="Jenny tapping her NFC keychain — music starts playing"
           ></video>
-          <div class="nfc-chip">
-            <div class="nfc-dot"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="2" fill="#C9A96E"/>
-              <path d="M8 12C8 9.8 9.8 8 12 8" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M5.5 12C5.5 8.4 8.4 5.5 12 5.5" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
-              <path d="M16 12C16 14.2 14.2 16 12 16" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M18.5 12C18.5 15.6 15.6 18.5 12 18.5" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
-            </svg>
-          </div>
+          <div class="hero-video-badge">♪</div>
         </div>
+        <p class="hero-video-caption">A real tap · no app needed</p>
+        <!-- 2026-10-19: simulated hero phone retired — the video now shows a real tap; code kept below
         <div class="phone" id="nfcPhone" title="Tap to play">
           <div class="phone-notch"></div>
           <div class="phone-screen" id="phoneScreen">
@@ -1656,6 +1682,7 @@
         </div>
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <audio id="nfcAudio" loop playsinline></audio>
+        -->
       </div>
     </div>
   </div>
@@ -2306,7 +2333,8 @@
   }
 
   // 网页一打开，就开始悄悄在后台下载音频
-  loadAudioAsBlob();
+  // 2026-10-19: hero phone demo retired — skip when its elements are absent
+  if (nfcPhone && nfcAudio) loadAudioAsBlob();
 
   function handlePhoneTap() {
     // 视觉动画
@@ -2366,12 +2394,12 @@
   }
 
   // 触发点击
-  nfcPhone.addEventListener('click', function(e) {
+  if (nfcPhone) nfcPhone.addEventListener('click', function(e) {
     handlePhoneTap();
   });
 
   // 音频自然播放结束重置
-  nfcAudio.addEventListener('ended', () => {
+  if (nfcAudio) nfcAudio.addEventListener('ended', () => {
     clearTimeout(nfcAudio._iconTimer);
     isPlaying = false;
     musicIcon.classList.remove('playing', 'tapped');

@@ -1389,7 +1389,8 @@
       position: relative;
       flex: 0 0 50%;
       overflow: hidden;
-      transition: transform 0.44s cubic-bezier(0.34, 1.42, 0.64, 1);
+      /* 分开时用这个过渡：柔和滑开，无回弹 */
+      transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
     }
     .pair-half img {
       position: absolute;
@@ -1405,7 +1406,11 @@
     .pair-half.r img { right: 0; }
 
     /* 点击吸合 / 再次点击分开 —— 只由 .snapped 控制，hover 不再干预，避免点第二次无法分开 */
-    .pair-card.snapped .pair-half { transform: translateX(0); }
+    /* 合上时用这个过渡：弹簧吸合感 */
+    .pair-card.snapped .pair-half {
+      transform: translateX(0);
+      transition: transform 0.44s cubic-bezier(0.34, 1.42, 0.64, 1);
+    }
 
     .pair-no {
       font-size: 0.64rem;

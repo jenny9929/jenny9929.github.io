@@ -1404,8 +1404,7 @@
     .pair-half.l img { left: 0; }
     .pair-half.r img { right: 0; }
 
-    .pair-card:hover .pair-half,
-    .pair-card:focus-visible .pair-half,
+    /* 点击吸合 / 再次点击分开 —— 只由 .snapped 控制，hover 不再干预，避免点第二次无法分开 */
     .pair-card.snapped .pair-half { transform: translateX(0); }
 
     .pair-no {
@@ -2069,7 +2068,7 @@
 </section>
 
 <script>
-  /* A Song for Two —— 点一下让两半吸合；桌面端 hover 即可 */
+  /* A Song for Two —— 点一下两半吸合，再点一下分开 */
   (function () {
     var cards = document.querySelectorAll('.pair-card');
     if (!cards.length) return;

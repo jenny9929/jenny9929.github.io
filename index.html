@@ -351,7 +351,7 @@
       display: block;
     }
 
-    /* floating music badge on the video */
+    /* sound toggle badge on the video */
     .hero-video-badge {
       position: absolute;
       right: 16px;
@@ -361,12 +361,25 @@
       border-radius: 50%;
       background: var(--gold);
       color: #fff;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       box-shadow: 0 8px 20px rgba(201, 169, 110, 0.55);
       animation: badge-pulse 2.4s ease-in-out infinite;
+    }
+    .hero-video-badge.muted::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 2px;
+      transform: rotate(-45deg);
     }
 
     /* caption under the video */
@@ -1661,9 +1674,9 @@
             preload="metadata"
             aria-label="Jenny tapping her NFC keychain — music starts playing"
           ></video>
-          <div class="hero-video-badge">♪</div>
+          <button class="hero-video-badge muted" id="videoBadge" aria-label="Tap for sound">♪</button>
         </div>
-        <p class="hero-video-caption">A real tap · no app needed</p>
+        <p class="hero-video-caption">A real tap · plays in your music app</p>
         <!-- 2026-10-19: simulated hero phone retired — the video now shows a real tap; code kept below
         <div class="phone" id="nfcPhone" title="Tap to play">
           <div class="phone-notch"></div>
@@ -1750,7 +1763,7 @@
       <p class="section-label">The Technology</p>
       <h2 class="section-title">Art with an <em>invisible layer</em></h2>
       <p class="section-body" style="margin-inline:auto; text-align:center;">
-        Every piece hides a tiny NFC chip. One tap with your phone — no app needed — and your artwork plays its own exclusive song. You can even customize it to a song that's entirely yours. The art you see and the music you hear become one.
+        Every piece hides a tiny NFC chip. One tap with your phone — no special app needed — and your artwork plays its own exclusive song, right in the music app you already use: Spotify, YouTube Music, even YouTube. You can even customize it to a song that's entirely yours. The art you see and the music you hear become one.
       </p>
     </div>
 
@@ -2409,6 +2422,20 @@
     songProgress.style.width = '0%';
     songText.textContent = 'tap to play ✦';
   });
+
+  // ─── Hero video sound toggle ───
+  const artworkVideo = document.getElementById('artworkVideo');
+  const videoBadge   = document.getElementById('videoBadge');
+  if (artworkVideo && videoBadge) {
+    function toggleVideoSound() {
+      artworkVideo.muted = !artworkVideo.muted;
+      videoBadge.classList.toggle('muted', artworkVideo.muted);
+      videoBadge.setAttribute('aria-label', artworkVideo.muted ? 'Tap for sound' : 'Mute sound');
+    }
+    videoBadge.addEventListener('click', function(e) { e.stopPropagation(); toggleVideoSound(); });
+    artworkVideo.addEventListener('click', toggleVideoSound);
+    artworkVideo.style.cursor = 'pointer';
+  }
 
   // ─── Series gallery drag + progress ───
   var seriesTrack    = document.getElementById('seriesTrack');

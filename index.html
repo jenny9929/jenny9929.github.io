@@ -1846,6 +1846,17 @@
           <p>Curated collections · NFC embedded</p>
         </div>
       </div>
+      <div class="product-card reveal reveal-delay-2" id="card-magnet">
+        <div class="product-img" style="padding:0;">
+          <img src="images/IMG_5882.jpeg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
+          <span class="nfc-badge">NFC</span>
+          <span class="play-cue">&#9654; Hear the song</span>
+        </div>
+        <div class="product-info">
+          <h4>Music Fridge Magnets</h4>
+          <p>Acrylic magnet · NFC embedded</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2715,6 +2726,45 @@
 </div>
 <audio id="modal-audio-giftset" playsinline></audio>
 
+<!-- ── Music Fridge Magnets modal ──────────────────────────────────────── -->
+<div id="nfc-modal-overlay-magnet" style="display:none; position:fixed; inset:0; background:rgba(28,26,23,0.85); z-index:500; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+  <div id="nfc-modal-card-magnet" style="position:relative; width:min(1100px,96vw); max-height:92vh; background:#2A2520; border:1px solid #C9A96E; border-radius:20px; overflow:hidden; display:flex; flex-direction:column;">
+    <button onclick="closeNFCModal_magnet()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#C9A96E; font-size:1.5rem; cursor:pointer; z-index:10;">×</button>
+    <div style="display:flex; align-items:stretch;">
+      <div style="width:60%; flex-shrink:0; min-height:580px; overflow:hidden; border-radius:19px 0 0 19px;">
+        <img id="modal-artwork-magnet" src="images/IMG_5882.jpeg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
+      </div>
+      <div id="modal-right-col-magnet" style="flex:1; position:relative; overflow:visible;">
+        <svg id="nfc-iphone-magnet" width="70" height="144" viewBox="0 0 70 144" style="cursor:grab; user-select:none; -webkit-user-select:none; touch-action:none; display:block; z-index:5; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5));">
+          <rect x="2" y="2" width="66" height="140" rx="13" fill="#1C1A17" stroke="#C9A96E" stroke-width="1.5"/>
+          <rect x="0" y="32" width="2" height="14" rx="1" fill="#3A3530"/>
+          <rect x="0" y="52" width="2" height="22" rx="1" fill="#3A3530"/>
+          <rect x="68" y="44" width="2" height="28" rx="1" fill="#3A3530"/>
+          <rect x="22" y="7" width="26" height="7" rx="3.5" fill="#0D0C0B"/>
+          <rect x="7" y="18" width="56" height="104" rx="5" fill="#1A1815"/>
+          <rect x="25" y="132" width="20" height="3" rx="1.5" fill="#3A3530"/>
+          <text id="iphone-note-magnet" x="35" y="63" text-anchor="middle" dominant-baseline="middle" fill="#C9A96E" font-size="30" font-family="Georgia,serif">♪</text>
+          <g id="iphone-playing-magnet" display="none">
+            <rect x="22" y="34" width="6" height="16" rx="3" fill="#C9A96E"><animate attributeName="height" values="16;7;16" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="34;38.5;34" dur="0.7s" repeatCount="indefinite"/></rect>
+            <rect x="32" y="31" width="6" height="22" rx="3" fill="#C9A96E"><animate attributeName="height" values="22;9;22" dur="0.7s" repeatCount="indefinite" begin="0.15s"/><animate attributeName="y" values="31;37;31" dur="0.7s" repeatCount="indefinite" begin="0.15s"/></rect>
+            <rect x="42" y="35" width="6" height="14" rx="3" fill="#C9A96E"><animate attributeName="height" values="14;6;14" dur="0.7s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="y" values="35;39;35" dur="0.7s" repeatCount="indefinite" begin="0.3s"/></rect>
+            <rect x="14" y="100" width="42" height="3" rx="1.5" fill="#2A2520"/>
+            <rect x="14" y="100" width="0" height="3" rx="1.5" fill="#C9A96E"><animate attributeName="width" values="0;42;0" dur="2.5s" repeatCount="indefinite"/></rect>
+          </g>
+        </svg>
+        <p id="modal-hint-magnet" style="position:absolute; bottom:1.5rem; left:0; right:0; color:#C9A96E; font-size:0.72rem; letter-spacing:0.06em; text-align:center; margin:0; line-height:1.8;">Drag the phone<br>to the magnet</p>
+      </div>
+    </div>
+    <div id="modal-player-magnet" style="display:none; padding:0.5rem 2rem 1rem; margin-top:0; text-align:center; border-top:1px solid rgba(201,169,110,0.2);">
+      <p style="color:#FAF7F2; font-family:'Cormorant Garamond',serif; font-size:1.1rem;">San Francisco</p>
+      <p style="color:#9E948C; font-size:0.8rem; margin-top:0.25rem;">Scott McKenzie</p>
+      <div style="margin-top:1rem; height:2px; background:#3A3530; border-radius:2px; overflow:hidden;"><div id="modal-progress-magnet" style="height:100%; width:0%; background:#C9A96E; transition:width 0.5s;"></div></div>
+      <button id="modal-pause-btn-magnet" onclick="toggleModalAudio_magnet()" style="margin-top:1rem; background:transparent; border:1px solid #C9A96E; color:#C9A96E; border-radius:50px; padding:0.4rem 1.2rem; font-size:0.8rem; cursor:pointer; -webkit-appearance:none; appearance:none;">❚❚ Pause</button>
+    </div>
+  </div>
+</div>
+<audio id="modal-audio-magnet" playsinline></audio>
+
 <script>
 (function() {
   var modalOverlay  = document.getElementById('nfc-modal-overlay');
@@ -3322,6 +3372,7 @@
   createNFCModal({ suffix: 'keychain', audioFile: 'perfect.mp3' });
   // 2026-10-19: diffuser delisted — createNFCModal({ suffix: 'diffuser', audioFile: 'beijing.mp3' });
   createNFCModal({ suffix: 'giftset',  audioFile: 'hawaii.mp3'  });
+  createNFCModal({ suffix: 'magnet',   audioFile: 'san-francisco.mp3' });
 })();
 </script>
 
@@ -3342,8 +3393,8 @@
 #card-painting { cursor: pointer; }
 #card-painting:hover { transform: translateY(-4px); transition: transform 0.3s; }
 #nfc-iphone, #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset { position: absolute; left: calc(50% - 35px); top: calc(50% - 72px); }
-#card-keychain, #card-diffuser, #card-giftset { cursor: pointer; }
-#card-keychain:hover, #card-diffuser:hover, #card-giftset:hover { transform: translateY(-4px); transition: transform 0.3s; }
+#card-keychain, #card-diffuser, #card-giftset, #card-magnet { cursor: pointer; }
+#card-keychain:hover, #card-diffuser:hover, #card-giftset:hover, #card-magnet:hover { transform: translateY(-4px); transition: transform 0.3s; }
 
 @media (max-width: 768px) {
   #nfc-modal-card { width: min(96vw, 480px) !important; max-height: 92vh !important; overflow-y: auto !important; }
@@ -3381,17 +3432,19 @@
     padding-top: 8px !important;
   }
   /* ── 新增三个弹窗的手机端适配 ── */
-  #nfc-modal-card-keychain, #nfc-modal-card-diffuser, #nfc-modal-card-giftset {
+  #nfc-modal-card-keychain, #nfc-modal-card-diffuser, #nfc-modal-card-giftset, #nfc-modal-card-magnet {
     width: min(96vw, 480px) !important; max-height: 92vh !important; overflow-y: auto !important;
   }
   #nfc-modal-card-keychain > div:first-of-type,
   #nfc-modal-card-diffuser > div:first-of-type,
-  #nfc-modal-card-giftset  > div:first-of-type {
+  #nfc-modal-card-giftset  > div:first-of-type,
+  #nfc-modal-card-magnet   > div:first-of-type {
     flex-direction: column !important; overflow: visible !important;
   }
   #nfc-modal-card-keychain > div:first-of-type > div:first-child,
   #nfc-modal-card-diffuser > div:first-of-type > div:first-child,
-  #nfc-modal-card-giftset  > div:first-of-type > div:first-child {
+  #nfc-modal-card-giftset  > div:first-of-type > div:first-child,
+  #nfc-modal-card-magnet   > div:first-of-type > div:first-child {
     width: 100% !important; min-height: 0 !important; height: auto !important;
     border-radius: 19px 19px 0 0 !important; background: #1C1A17 !important;
   }
@@ -3427,7 +3480,8 @@
       'modal-audio':          function () { if (window.toggleModalAudio)          window.toggleModalAudio(); },
       'modal-audio-keychain': function () { if (window.toggleModalAudio_keychain) window.toggleModalAudio_keychain(); },
       'modal-audio-diffuser': function () { if (window.toggleModalAudio_diffuser) window.toggleModalAudio_diffuser(); },
-      'modal-audio-giftset':  function () { if (window.toggleModalAudio_giftset)  window.toggleModalAudio_giftset(); }
+      'modal-audio-giftset':  function () { if (window.toggleModalAudio_giftset)  window.toggleModalAudio_giftset(); },
+      'modal-audio-magnet':   function () { if (window.toggleModalAudio_magnet)   window.toggleModalAudio_magnet(); }
     };
 
     var players = Object.keys(STOPPERS)

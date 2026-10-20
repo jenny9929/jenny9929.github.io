@@ -1802,13 +1802,13 @@
     <div class="product-grid">
       <div class="product-card reveal" id="card-painting">
         <div class="product-img" style="padding:0;">
-          <img src="images/裱画.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
+          <img src="images/IMG_0180.jpeg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
           <span class="nfc-badge">NFC</span>
           <span class="play-cue">&#9654; Hear the song</span>
         </div>
         <div class="product-info">
-          <h4>Original Painting</h4>
-          <p>Mixed media digital art · NFC embedded</p>
+          <h4>Original Illustration</h4>
+          <p>Digital illustration · NFC embedded</p>
         </div>
       </div>
       <div class="product-card reveal reveal-delay-1" id="card-keychain">
@@ -1822,6 +1822,7 @@
           <p>Resin craft · NFC embedded</p>
         </div>
       </div>
+      <!-- 2026-10-19: Fragrance Diffuser 下架，代码保留
       <div class="product-card reveal reveal-delay-2" id="card-diffuser">
         <div class="product-img" style="padding:0;">
           <img src="images/香薰片.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
@@ -1833,6 +1834,7 @@
           <p>Aromatherapy · NFC embedded</p>
         </div>
       </div>
+      -->
       <div class="product-card reveal reveal-delay-3" id="card-giftset">
         <div class="product-img" style="padding:0;">
           <img src="images/礼盒.jpg?v=2" style="width:100%; height:100%; object-fit:cover; border-radius:12px 12px 0 0;">
@@ -2539,7 +2541,7 @@
     <div style="display:flex; align-items:stretch;">
       <!-- Left: artwork (60%) -->
       <div style="width:60%; flex-shrink:0; min-height:580px; overflow:hidden; border-radius:19px 0 0 19px;">
-        <img id="modal-artwork" src="images/裱画.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
+        <img id="modal-artwork" src="images/IMG_0180.jpeg" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"/>
       </div>
       <!-- Right: iPhone + hint (40%) — position:relative so iPhone can be absolute inside -->
       <div id="modal-right-col" style="flex:1; position:relative; overflow:visible;">
@@ -3318,7 +3320,7 @@
   }
 
   createNFCModal({ suffix: 'keychain', audioFile: 'perfect.mp3' });
-  createNFCModal({ suffix: 'diffuser', audioFile: 'beijing.mp3' });
+  // 2026-10-19: diffuser delisted — createNFCModal({ suffix: 'diffuser', audioFile: 'beijing.mp3' });
   createNFCModal({ suffix: 'giftset',  audioFile: 'hawaii.mp3'  });
 })();
 </script>

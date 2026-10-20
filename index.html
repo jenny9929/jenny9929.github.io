@@ -2825,6 +2825,7 @@
     if (desktopDragSetup) {
       nfcTriggered = false;
       iphone.style.position = '';
+      iphone.style.filter = iphone.dataset.sf || '';
       iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
       iphone.style.left = '';
       iphone.style.top  = '';
@@ -2843,6 +2844,8 @@
       iphone.style.transition = '';
       iphone.style.cursor = 'grabbing';
       document.body.style.cursor = 'grabbing';
+      iphone.dataset.sf = iphone.style.filter;
+      iphone.style.filter = 'none'; // 拖拽时去掉投影，避免重绘残影
       var ir = iphone.getBoundingClientRect();
       var rr = rightCol.getBoundingClientRect();
       iphone.style.left = (ir.left - rr.left) + 'px';
@@ -2865,6 +2868,7 @@
         mouseDragging = false;
         document.body.style.cursor = '';
         iphone.style.cursor = 'grab';
+        iphone.style.filter = iphone.dataset.sf || '';
         iphone.style.transition = 'left 0.6s ease-out, top 0.6s ease-out';
         iphone.style.left = '';
         iphone.style.top  = '';
@@ -2877,6 +2881,7 @@
       mouseDragging = false;
       document.body.style.cursor = '';
       iphone.style.cursor = 'grab';
+      iphone.style.filter = iphone.dataset.sf || '';
       iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
       iphone.style.left = '';
       iphone.style.top  = '';
@@ -2925,6 +2930,8 @@
       touchDragging = true;
       touchTriggered = false;
       iphone.style.transition = '';
+      iphone.dataset.sf = iphone.style.filter;
+      iphone.style.filter = 'none'; // 拖拽时去掉投影，避免重绘残影
       var rect = iphone.getBoundingClientRect();
       iphoneInitRect = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
       iphone.style.position = 'fixed';
@@ -2961,6 +2968,7 @@
           iphone.style.top  = '';
           iphone.style.width = iphone.style.height = '';
           iphone.style.transition = iphone.style.zIndex = '';
+          iphone.style.filter = iphone.dataset.sf || '';
         }, 600);
         var ar2 = artwork.getBoundingClientRect();
         var ripple = document.createElement('div');
@@ -3000,6 +3008,7 @@
         iphone.style.top  = '';
         iphone.style.width = iphone.style.height = '';
         iphone.style.transition = iphone.style.zIndex = '';
+        iphone.style.filter = iphone.dataset.sf || '';
       }, 500);
     });
   }
@@ -3172,6 +3181,7 @@
       if (desktopDragSetup) {
         nfcTriggered = false;
         iphone.style.position = '';
+        iphone.style.filter = iphone.dataset.sf || '';
         iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
         iphone.style.left = ''; iphone.style.top = '';
         setTimeout(function(){ iphone.style.transition = ''; }, 450);
@@ -3187,6 +3197,8 @@
         iphone.style.transition = '';
         iphone.style.cursor = 'grabbing';
         document.body.style.cursor = 'grabbing';
+        iphone.dataset.sf = iphone.style.filter;
+        iphone.style.filter = 'none'; // 拖拽时去掉投影，避免重绘残影
         var ir = iphone.getBoundingClientRect();
         var rr = rightCol.getBoundingClientRect();
         iphone.style.left = (ir.left - rr.left) + 'px';
@@ -3210,6 +3222,7 @@
           mouseDragging = false;
           document.body.style.cursor = '';
           iphone.style.cursor = 'grab';
+          iphone.style.filter = iphone.dataset.sf || '';
           iphone.style.transition = 'left 0.6s ease-out, top 0.6s ease-out';
           iphone.style.left = ''; iphone.style.top = '';
           triggerPlay(ix, iy);
@@ -3221,6 +3234,7 @@
         mouseDragging = false;
         document.body.style.cursor = '';
         iphone.style.cursor = 'grab';
+        iphone.style.filter = iphone.dataset.sf || '';
         iphone.style.transition = 'left 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s cubic-bezier(0.34,1.56,0.64,1)';
         iphone.style.left = ''; iphone.style.top = '';
         setTimeout(function(){ iphone.style.transition = ''; }, 450);
@@ -3241,6 +3255,8 @@
         e.preventDefault(); e.stopPropagation();
         touchDragging = true; touchTriggered = false;
         iphone.style.transition = '';
+        iphone.dataset.sf = iphone.style.filter;
+        iphone.style.filter = 'none'; // 拖拽时去掉投影，避免重绘残影
         var rect = iphone.getBoundingClientRect();
         iphoneInitRect = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
         iphone.style.position = 'fixed'; iphone.style.zIndex = '9999';
@@ -3269,6 +3285,7 @@
             iphone.style.position = ''; iphone.style.left = ''; iphone.style.top = '';
             iphone.style.width = iphone.style.height = '';
             iphone.style.transition = iphone.style.zIndex = '';
+            iphone.style.filter = iphone.dataset.sf || '';
           }, 600);
           var ar2 = artwork.getBoundingClientRect();
           var ripple = document.createElement('div');
@@ -3305,6 +3322,7 @@
           iphone.style.position = ''; iphone.style.left = ''; iphone.style.top = '';
           iphone.style.width = iphone.style.height = '';
           iphone.style.transition = iphone.style.zIndex = '';
+          iphone.style.filter = iphone.dataset.sf || '';
         }, 500);
       });
     }
@@ -3392,7 +3410,7 @@
 #nfc-modal-overlay.open { display: flex !important; }
 #card-painting { cursor: pointer; }
 #card-painting:hover { transform: translateY(-4px); transition: transform 0.3s; }
-#nfc-iphone, #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset { position: absolute; left: calc(50% - 35px); top: calc(50% - 72px); }
+#nfc-iphone, #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset, #nfc-iphone-magnet { position: absolute; left: calc(50% - 35px); top: calc(50% - 72px); }
 #card-keychain, #card-diffuser, #card-giftset, #card-magnet { cursor: pointer; }
 #card-keychain:hover, #card-diffuser:hover, #card-giftset:hover, #card-magnet:hover { transform: translateY(-4px); transition: transform 0.3s; }
 
@@ -3448,21 +3466,21 @@
     width: 100% !important; min-height: 0 !important; height: auto !important;
     border-radius: 19px 19px 0 0 !important; background: #1C1A17 !important;
   }
-  #modal-artwork-keychain, #modal-artwork-diffuser, #modal-artwork-giftset {
+  #modal-artwork-keychain, #modal-artwork-diffuser, #modal-artwork-giftset, #modal-artwork-magnet {
     width: 100% !important; height: auto !important;
     aspect-ratio: 1/1 !important; object-fit: contain !important; object-position: center !important;
   }
-  #modal-right-col-keychain, #modal-right-col-diffuser, #modal-right-col-giftset {
+  #modal-right-col-keychain, #modal-right-col-diffuser, #modal-right-col-giftset, #modal-right-col-magnet {
     min-height: 200px; position: relative !important; overflow: visible !important;
   }
-  #modal-hint-keychain, #modal-hint-diffuser, #modal-hint-giftset {
+  #modal-hint-keychain, #modal-hint-diffuser, #modal-hint-giftset, #modal-hint-magnet {
     position: absolute !important; bottom: 1rem !important; top: auto !important;
   }
-  #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset {
+  #nfc-iphone-keychain, #nfc-iphone-diffuser, #nfc-iphone-giftset, #nfc-iphone-magnet {
     position: absolute; width: 48px; height: 100px;
     left: calc(50% - 24px); top: 24px;
   }
-  #modal-player-keychain, #modal-player-diffuser, #modal-player-giftset {
+  #modal-player-keychain, #modal-player-diffuser, #modal-player-giftset, #modal-player-magnet {
     padding-top: 8px !important;
   }
 }

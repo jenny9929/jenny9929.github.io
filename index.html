@@ -2454,6 +2454,16 @@
       artworkVideo.muted = !artworkVideo.muted;
       videoBadge.classList.toggle('muted', artworkVideo.muted);
       videoBadge.setAttribute('aria-label', artworkVideo.muted ? 'Tap for sound' : 'Mute sound');
+      if (!artworkVideo.muted) {
+        // 手动打开 Hero 声音时，停掉正在播放的弹窗音乐，避免混音
+        [['modal-audio','toggleModalAudio'],['modal-audio-keychain','toggleModalAudio_keychain'],['modal-audio-giftset','toggleModalAudio_giftset'],['modal-audio-magnet','toggleModalAudio_magnet']].forEach(function(pair){
+          var a = document.getElementById(pair[0]);
+          if (a && !a.paused) {
+            try { if (window[pair[1]]) window[pair[1]](); } catch (e) {}
+            if (!a.paused) a.pause();
+          }
+        });
+      }
     }
     videoBadge.addEventListener('click', function(e) { e.stopPropagation(); toggleVideoSound(); });
     artworkVideo.addEventListener('click', toggleVideoSound);
@@ -3489,13 +3499,19 @@
 
 
 <script>
-  /* 全局音频互斥：页面上有 5 个独立播放器（首页 1 个 + 产品弹窗 4 个），
+  /* 全局音频互斥：页面上有多个独立播放器（首页 nfcAudio + Hero 视频 + 产品弹窗），
      以前互不知情会一起响。现在任何一个开始播放，其余的都停掉并复位各自的 UI。
-     复位走每个播放器已有的路径 —— 首页那个用 'ended' 事件，弹窗用它们自己的
-     toggle 函数（只有它能清掉进度条的 setInterval）。 */
+     复位走每个播放器已有的路径 —— nfcAudio 用 'ended' 事件，弹窗用它们自己的
+     toggle 函数（只有它能清掉进度条的 setInterval），Hero 视频则是静音 + 徽章复位。 */
   (function () {
     var STOPPERS = {
       'nfcAudio':             function (a) { a.dispatchEvent(new Event('ended')); },
+      'artworkVideo':         function () {
+        var v = document.getElementById('artworkVideo');
+        var b = document.getElementById('videoBadge');
+        if (v) v.muted = true;
+        if (b) { b.classList.add('muted'); b.setAttribute('aria-label', 'Tap for sound'); }
+      },
       'modal-audio':          function () { if (window.toggleModalAudio)          window.toggleModalAudio(); },
       'modal-audio-keychain': function () { if (window.toggleModalAudio_keychain) window.toggleModalAudio_keychain(); },
       'modal-audio-diffuser': function () { if (window.toggleModalAudio_diffuser) window.toggleModalAudio_diffuser(); },

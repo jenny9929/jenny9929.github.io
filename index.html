@@ -1371,11 +1371,17 @@
       box-shadow: 0 6px 22px rgba(58, 53, 48, 0.09);
       transition: box-shadow 0.42s ease, transform 0.42s ease;
     }
-    .pair-card:hover .pair-frame,
-    .pair-card:focus-visible .pair-frame,
     .pair-card.snapped .pair-frame {
       box-shadow: 0 16px 42px rgba(58, 53, 48, 0.17);
       transform: translateY(-4px);
+    }
+    /* hover 浮起只在真鼠标设备上生效：iPad 上 hover 会粘住，导致松开后卡片落不下来 */
+    @media (hover: hover) {
+      .pair-card:hover .pair-frame,
+      .pair-card:focus-visible .pair-frame {
+        box-shadow: 0 16px 42px rgba(58, 53, 48, 0.17);
+        transform: translateY(-4px);
+      }
     }
     .pair-card:focus-visible .pair-frame {
       outline: 2px solid var(--gold);

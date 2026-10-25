@@ -218,6 +218,8 @@
     #hero {
       min-height: 100svh;
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
       position: relative;
       overflow: hidden;
@@ -1605,51 +1607,55 @@
       #hero { padding-top: 102px; }
     }
 
-    /* ─── Leather feature card (below hero) ─── */
-    .leather-feature {
-      padding: 3.5rem 0;
-    }
-    .feature-card {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      background: var(--white);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(58, 53, 48, 0.08);
-      max-width: 1020px;
-      margin-inline: auto;
-    }
-    .feature-card-text {
-      grid-column: 1;
-      grid-row: 1;
-      padding: 3rem;
+    /* ─── Leather strip inside hero ─── */
+    .hero-leather-strip {
+      position: relative;
+      z-index: 2;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
+      align-items: center;
       gap: 1rem;
+      width: min(1020px, 92%);
+      margin: 0 auto 2rem;
+      padding: 0.8rem 1.25rem;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(201, 169, 110, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(58, 53, 48, 0.08);
     }
-    .feature-card-text h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 300;
-      line-height: 1.3;
-      color: var(--text);
-    }
-    .feature-card-img {
-      grid-column: 2;
-      grid-row: 1;
-    }
-    .feature-card-img img {
-      width: 100%;
-      height: 100%;
+    .hero-leather-strip img {
+      width: 60px;
+      height: 60px;
       object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .hero-leather-strip-text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+    .hero-leather-strip-text strong {
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+    .hero-leather-strip-btn {
+      flex-shrink: 0;
+      font-size: 0.85rem !important;
+      padding: 0.6rem 1.4rem !important;
     }
     @media (max-width: 768px) {
-      .leather-feature { padding: 2.5rem 0; }
-      .feature-card { grid-template-columns: 1fr; }
-      .feature-card-img { grid-column: 1; grid-row: 1; aspect-ratio: 4 / 3; }
-      .feature-card-text { grid-column: 1; grid-row: 2; padding: 2rem; }
+      .hero-leather-strip {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+      .hero-leather-strip img { width: 52px; height: 52px; }
+      .hero-leather-strip-text { flex: 1 1 180px; font-size: 0.9rem; }
+      .hero-leather-strip-btn { margin-inline: auto; }
     }
 
     /* ─── Leather popup (once per visitor) ─── */
@@ -1810,18 +1816,41 @@
     }
 
     /* 集市 —— 只列名字，本身就是背书 */
-    .market-list {
+    /* Find Me At —— 已确认市集日程（日期＋场次＋地点） */
+    .market-schedule {
       list-style: none;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      flex-direction: column;
     }
-    .market-list li {
-      font-size: 0.82rem;
-      color: var(--text-mid);
-      border: 1px solid rgba(201, 169, 110, 0.3);
-      border-radius: 50px;
-      padding: 0.42rem 1rem;
+    .market-schedule li {
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(201, 169, 110, 0.18);
+    }
+    .market-schedule li:last-child { border-bottom: none; }
+    .market-date {
+      flex: 0 0 136px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      line-height: 1.5;
+    }
+    .market-detail { flex: 1; }
+    .market-name {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .market-place {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.5;
     }
 
     @media (max-width: 820px) {
@@ -1850,7 +1879,7 @@
   -->
 </div>
 
-<a class="gold-bar" href="#leather">New &middot; The Leather Line &mdash; handcrafted in genuine leather&nbsp;&nbsp;&rarr;</a>
+<a class="gold-bar" href="#inperson">Holiday market season &mdash; find me in person&nbsp;&nbsp;&rarr;</a>
 
 <nav id="navbar">
   <div class="container nav-inner">
@@ -1878,6 +1907,11 @@
 <section id="hero">
   <div class="hero-bg-orb orb-1"></div>
   <div class="hero-bg-orb orb-2"></div>
+  <a class="hero-leather-strip" href="#leather">
+    <img src="images/leather-cablecar-front.jpg" alt="The Cable Car Card Holder" />
+    <span class="hero-leather-strip-text"><strong>New &middot; The Leather Line</strong> &mdash; Bay Area stories, now in genuine leather.</span>
+    <span class="btn btn-gold hero-leather-strip-btn">See the collection</span>
+  </a>
   <div class="container hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow">Bay Area Independent Artist</div>
@@ -1928,21 +1962,6 @@
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <audio id="nfcAudio" loop playsinline></audio>
         -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="leather-feature">
-  <div class="container">
-    <div class="feature-card reveal">
-      <div class="feature-card-img">
-        <img src="images/leather-cablecar-front.jpg" alt="The Cable Car Card Holder" loading="lazy" />
-      </div>
-      <div class="feature-card-text">
-        <p class="section-label">New &middot; The Leather Line</p>
-        <h2>Bay Area stories, now in genuine leather.</h2>
-        <a href="#leather" class="btn btn-gold">See the collection</a>
       </div>
     </div>
   </div>
@@ -2431,7 +2450,16 @@
 
       <div class="inperson-block">
         <h3>Find Me At</h3>
-        <ul class="market-list"><li>MAUM Market</li><li>Makers Market</li><li>Vibe Artisan Market</li></ul>
+        <ul class="market-schedule">
+          <li><span class="market-date">Sat Oct 31</span><span class="market-detail"><span class="market-name">Boo by the Blue</span><span class="market-place">The Marine Mammal Center &middot; Sausalito</span></span></li>
+          <li><span class="market-date">Sun Nov 8</span><span class="market-detail"><span class="market-name">Head West</span><span class="market-place">Patricia&rsquo;s Green &middot; Hayes Valley &middot; San Francisco</span></span></li>
+          <li><span class="market-date">Fri Nov 13</span><span class="market-detail"><span class="market-name">Age Well Center</span><span class="market-place">Fremont</span></span></li>
+          <li><span class="market-date">Sun Nov 15</span><span class="market-detail"><span class="market-name">Makers Market</span><span class="market-place">Santana Row &middot; San Jose</span></span></li>
+          <li><span class="market-date">Sat&ndash;Sun Nov 28&ndash;29</span><span class="market-detail"><span class="market-name">Fellowship of Craft</span><span class="market-place">Henry J. Kaiser Center for the Arts &middot; Oakland</span></span></li>
+          <li><span class="market-date">Sat&ndash;Sun Dec 12&ndash;13</span><span class="market-detail"><span class="market-name">Vibe Artisan Market</span><span class="market-place">Winter Vibe &middot; San Francisco</span></span></li>
+          <li><span class="market-date">Sat Dec 19</span><span class="market-detail"><span class="market-name">Makers Market</span><span class="market-place">Los Gatos</span></span></li>
+          <li><span class="market-date">Sun Dec 20</span><span class="market-detail"><span class="market-name">MAUM Market</span><span class="market-place">Ferry Building &middot; San Francisco</span></span></li>
+        </ul>
       </div>
     </div>
   </div>

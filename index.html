@@ -1507,6 +1507,74 @@
       .gallery-hint-dot { animation: none; }
     }
 
+    /* ─── Leather ─── */
+    #leather {
+      padding-block: 6rem;
+      background: var(--cream);
+    }
+
+    .leather-header {
+      width: min(680px, 88%);
+      margin-inline: auto;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .leather-header .section-body {
+      margin-inline: auto;
+    }
+
+    .leather-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 1020px;
+      margin-inline: auto;
+    }
+
+    .leather-photos {
+      display: grid;
+      gap: 11px;
+    }
+    .leather-photos.two { grid-template-columns: 1fr 1fr; }
+    .leather-photos.three { grid-template-columns: 1fr 1fr 1fr; }
+
+    .leather-photos span {
+      display: block;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 4 / 3;
+    }
+    .leather-photos span img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .leather-name {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .leather-desc {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    .leather-foot {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      #leather { padding-block: 4.5rem; }
+      .leather-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+    }
+
     /* ─── Art You Can Hold (线下) ─── */
     #inperson {
       padding-block: 7rem;
@@ -1623,6 +1691,7 @@
   <a href="#nfc" onclick="closeMobileNav()">NFC Art</a>
   <!-- 2026-10-19: For Her hidden with series takedown <a href="#series" onclick="closeMobileNav()">For Her</a> -->
   <a href="#pairs" onclick="closeMobileNav()">For Two</a>
+  <a href="#leather" onclick="closeMobileNav()">Leather</a>
   <a href="#inperson" onclick="closeMobileNav()">In Person</a>
   <a href="#collab" onclick="closeMobileNav()">Collaborate</a>
   <a href="/shop" onclick="closeMobileNav()">Shop</a>
@@ -1639,6 +1708,7 @@
       <li><a href="#nfc">NFC Art</a></li>
       <!-- 2026-10-19: For Her hidden with series takedown <li><a href="#series">For Her</a></li> -->
       <li><a href="#pairs">For Two</a></li>
+      <li><a href="#leather">Leather</a></li>
       <li><a href="#inperson">In Person</a></li>
       <li><a href="#collab">Collaborate</a></li>
       <li><a href="/shop">Shop</a></li>
@@ -2129,6 +2199,46 @@
   })();
 </script>
 
+
+<section id="leather">
+  <div class="container">
+    <div class="leather-header reveal">
+      <p class="section-label">The Leather Line</p>
+      <h2 class="section-title">Genuine Leather, <em>Made by Hand</em></h2>
+      <p class="section-body leather-intro">I started with stationery — and kept hearing the same thing. People love giving Bay Area–themed gifts, but stationery can only say so much. Sometimes a gift needs more weight: something better-made, a little more precious, and useful every single day. So I made leather goods — the same Bay Area stories, in materials that last.</p>
+    </div>
+
+    <div class="leather-grid">
+      <article class="leather-card reveal">
+        <div class="pair-frame">
+          <div class="leather-photos two">
+            <span><img src="images/leather-cablecar-front.jpg" alt="The Cable Car Card Holder — front" loading="lazy" /></span>
+            <span><img src="images/leather-cablecar-back.jpg" alt="The Cable Car Card Holder — back" loading="lazy" /></span>
+          </div>
+        </div>
+        <h3 class="leather-name">The Cable Car Card Holder</h3>
+        <p class="leather-desc">San Francisco, in your pocket. Head-grain cowhide, hand-stitched, an original JennyDIYCorner design.</p>
+      </article>
+
+      <article class="leather-card reveal reveal-delay-1">
+        <div class="pair-frame">
+          <div class="leather-photos three">
+            <span><img src="images/leather-wallet-cow-body.jpg" alt="The Palette Wallet — cow-print body, dark brown strap" loading="lazy" /></span>
+            <span><img src="images/leather-wallet-wine.jpg" alt="The Palette Wallet — wine body, cream strap" loading="lazy" /></span>
+            <span><img src="images/leather-wallet-cow-strap.jpg" alt="The Palette Wallet — dark brown body, cow-print strap" loading="lazy" /></span>
+          </div>
+        </div>
+        <h3 class="leather-name">The Palette Wallet</h3>
+        <p class="leather-desc">The silhouette is a classic — the colours are the original part. Three colourways, each one a little unexpected. Chic, not loud.</p>
+        <p class="leather-desc">More colourways on the way.</p>
+      </article>
+    </div>
+
+    <div class="leather-foot reveal">
+      <a href="https://www.etsy.com/shop/JennyDIYCorner" class="btn btn-outline" target="_blank" rel="noopener">Available in person at markets, and on Etsy →</a>
+    </div>
+  </div>
+</section>
 
 <section id="inperson">
   <div class="inperson-header reveal">

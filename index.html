@@ -1605,6 +1605,53 @@
       #hero { padding-top: 102px; }
     }
 
+    /* ─── Leather feature card (below hero) ─── */
+    .leather-feature {
+      padding: 3.5rem 0;
+    }
+    .feature-card {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(58, 53, 48, 0.08);
+      max-width: 1020px;
+      margin-inline: auto;
+    }
+    .feature-card-text {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .feature-card-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .feature-card-img {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .feature-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .leather-feature { padding: 2.5rem 0; }
+      .feature-card { grid-template-columns: 1fr; }
+      .feature-card-img { grid-column: 1; grid-row: 1; aspect-ratio: 4 / 3; }
+      .feature-card-text { grid-column: 1; grid-row: 2; padding: 2rem; }
+    }
+
     /* ─── Art You Can Hold (线下) ─── */
     #inperson {
       padding-block: 7rem;
@@ -1808,6 +1855,21 @@
         <div class="phone-tap-hint">☝ Click the phone to play · NFC experience</div>
         <audio id="nfcAudio" loop playsinline></audio>
         -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="leather-feature">
+  <div class="container">
+    <div class="feature-card reveal">
+      <div class="feature-card-img">
+        <img src="images/leather-cablecar-front.jpg" alt="The Cable Car Card Holder" loading="lazy" />
+      </div>
+      <div class="feature-card-text">
+        <p class="section-label">New &middot; The Leather Line</p>
+        <h2>Bay Area stories, now in genuine leather.</h2>
+        <a href="#leather" class="btn btn-gold">See the collection</a>
       </div>
     </div>
   </div>

@@ -1575,6 +1575,36 @@
       .leather-grid { grid-template-columns: 1fr; gap: 2.25rem; }
     }
 
+    /* ─── Gold announcement bar ─── */
+    .gold-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      z-index: 101;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      line-height: 1.45;
+      text-align: center;
+      padding: 0 12px;
+    }
+    nav { top: 52px; }
+    #hero { padding-top: 116px; }
+    @media (min-width: 769px) {
+      .gold-bar {
+        height: 38px;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+      }
+      nav { top: 38px; }
+      #hero { padding-top: 102px; }
+    }
+
     /* ─── Art You Can Hold (线下) ─── */
     #inperson {
       padding-block: 7rem;
@@ -1699,6 +1729,8 @@
   <a href="zh.html" class="lang-switch" onclick="closeMobileNav()">中文</a>
   -->
 </div>
+
+<a class="gold-bar" href="#leather">New &middot; The Leather Line &mdash; handcrafted in genuine leather&nbsp;&nbsp;&rarr;</a>
 
 <nav id="navbar">
   <div class="container nav-inner">
